@@ -51,7 +51,7 @@ namespace datagrid
                 FontStyle.Underline
                 );
             lb_ipiresiesResult.Text = 5 + "";
-            dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.Gray;
+            dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
         }
 
 
