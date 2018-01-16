@@ -18,6 +18,7 @@ namespace datagrid
             InitializeComponent();
         }
         string _database = Directory.GetCurrentDirectory() + "/db.txt";
+        int remaningRows = 0;
         private void InitUI()
         {
             string[] days = new string[]
@@ -50,7 +51,7 @@ namespace datagrid
                 FontStyle.Underline
                 );
             lb_ipiresiesResult.Text = 5 + "";
-            
+            dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.Gray;
         }
 
 
@@ -122,10 +123,14 @@ namespace datagrid
                 if (item.Contains(tb_add_name.Text))
                     cbb_add_names.SelectedItem = item;
         }
-
+        
         private void btn_addRow_Click(object sender, EventArgs e)
         {
+           
+            dataGridView1.Rows[dataGridView1.Rows.Count - 1 - remaningRows].DefaultCellStyle.BackColor = Color.White;
             dataGridView1.Rows.Insert(0, "");
+            dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
+            remaningRows++;
         }
 
        
