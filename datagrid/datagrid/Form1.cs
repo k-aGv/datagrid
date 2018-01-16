@@ -79,6 +79,7 @@ namespace datagrid
             {
                 _readerTimestamp = new StreamReader(_timeStamp);
                 tb_start.Text = _readerTimestamp.ReadLine().Remove(0, 10); //10 chars -> StartTime
+                _readerTimestamp.Close();
             }
             if (!File.Exists(_database))
             {
