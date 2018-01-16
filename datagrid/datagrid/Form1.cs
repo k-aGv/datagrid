@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace datagrid
 {
@@ -16,17 +17,28 @@ namespace datagrid
         {
             InitializeComponent();
         }
-
+        string _database = Directory.GetCurrentDirectory() + "/db.txt";
         private void InitUI()
         {
             string[] days = new string[]
-            { "deftera", "triti", "tetarti","pempti","paraskevi","savato","kiriaki"};
+            { "Δευτέρα", "Τρίτη", "Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο","Κυριακή"};
+            string names = "[ΧΡΙΣΤΟΔΟΥΛΟΣ,ΓΚΙΟΥΡΣΑΝΗΣ,ΠΑΠΑΓΕΩΡΓΙΟΥ,ΛΙΑΚΟΣ,ΠΟΥΡΝΑΡΑΣ,ΑΝΑΤΟΛΙΤΗΣ,ΒΑΛΑΤΣΟΣ,ΚΑΤΣΑΡΑΣ,ΤΣΙΤΣΙΒΑΣ,ΓΚΟΥΨΖΑΡΑΣ]";
+
+            InitDB(days, names);
+
+            names = names.Replace('[', ' ');
+            names = names.Replace(']', ' ');
+            char[] delim = { ',' };
+            foreach (string item in names.Remove(0, 1).Split(delim, StringSplitOptions.RemoveEmptyEntries))
+                cbb_add_names.Items.Add(item);
+            
 
             for (int i = 0; i < 7; i++)
             {
                 dataGridView1.Columns[i].HeaderText = days[i];
                 dataGridView1.Columns[i].Width = 150;
             }
+
 
             tb_latest.ReadOnly = true;
             tb_start.ReadOnly = true;
@@ -35,48 +47,127 @@ namespace datagrid
                 new Font
                 (
                 lb_add.Font,
-                FontStyle.Underline 
+                FontStyle.Underline
                 );
-            lb_ipiresiesResult.Text = 5 +"";
-            Timer currentTime = new Timer();
-            currentTime.Tick += new EventHandler(curTick);
-            label1.Text = "";
-            currentTime.Interval = 1000;
-            currentTime.Start();
-            lb_ipiresies.Visible = lb_ipiresiesResult.Visible = btn_clear.Visible= false;
+            lb_ipiresiesResult.Text = 5 + "";
         }
+
+
+        private void InitDB(string[] _days, string _names)
+        {
+            int column, row;
+
+            StreamWriter _writer;
+            StreamReader _reader;
+            if (!File.Exists(_database))
+            {
+                _writer = new StreamWriter(_database);
+                _writer.WriteLine("[NAMES]\n" + _names);
+                _writer.Close();
+            }
+            else
+            {
+                _reader = new StreamReader(_database);
+                column = Convert.ToInt32(_reader.ReadLine().Split(':')[1]);
+                row = Convert.ToInt32(_reader.ReadLine().Split(':')[1]);
+                for (int p = 0; p < row - 1; p++)
+                    dataGridView1.Rows.Add();
+                string[,] _table = new string[column, row];
+                string[] _line;
+                int i = 0;
+                int j = 0;
+                do
+                {
+                    i = 0;
+                    _line = _reader.ReadLine().Split(',');
+
+                    foreach (string item in _line)
+                    {
+                        if (i <= _line.Length - 2)
+                        {
+                            dataGridView1[i, j].Value = item;
+                            i++;
+                        }
+                    }
+                    j++;
+                } while (!_reader.EndOfStream);
+
+                _reader.Close();
+            }
+
+        }
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
             InitUI();
         }
 
-        private void curTick(object sender, EventArgs e)
+        private void btn_add_Click(object sender, EventArgs e)
         {
-            label1.Text = DateTime.Now.ToString("HH:mm:ss");
-            label1.Text += " " + DateTime.Now.Day + "-" + DateTime.Now.ToString("MMM") + "-" + DateTime.Now.Year;
+            if (cbb_add_names.SelectedIndex == -1)
+            {
+                MessageBox.Show("Δεν έχετε επιλέξει όνομα.");
+                return;
+            }
+
+            foreach (DataGridViewCell _c in dataGridView1.SelectedCells)
+                _c.Value = cbb_add_names.Text;
+        }
+
+        private void tb_add_name_TextChanged(object sender, EventArgs e)
+        {
+            foreach (string item in cbb_add_names.Items)
+                if (item.Contains(tb_add_name.Text))
+                    cbb_add_names.SelectedItem = item;
+        }
+
+        private void btn_addRow_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Add();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StreamWriter _writer = new StreamWriter(_database);
+            _writer.WriteLine("Columns:" + dataGridView1.Columns.Count);
+            _writer.WriteLine("Rows:" + dataGridView1.Rows.Count);
+
+            string _grid;
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                _grid = "";
+                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                {
+                    _grid += dataGridView1[j, i].Value + ",";
+                }
+
+                _writer.WriteLine(_grid);
+            }
+            _writer.Close();
         }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Η αναζητηση τελείωσε");
-            lb_ipiresies.Visible = lb_ipiresiesResult.Visible = btn_clear.Visible = true;
-
-        }
-        bool confirm;
-        private void btn_clear_Click(object sender, EventArgs e)
-        {
-            DialogResult dr = MessageBox.Show("Εκκαθάριση;",
-                      "", MessageBoxButtons.YesNo);
-            confirm = (dr == DialogResult.Yes) ? true : false;
-            if(confirm) lb_ipiresies.Visible = lb_ipiresiesResult.Visible = btn_clear.Visible = false;
-            confirm = false;
-            
+            foreach (DataGridViewCell item in dataGridView1.SelectedCells)
+            {
+                item.Selected = false;
+            }
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                {
+                    string _s = "";
+                    try
+                    {
+                        _s = dataGridView1[j, i].Value.ToString();
+                    }
+                    catch { }
+                    if (_s == tb_search_name.Text)
+                    {
+                        dataGridView1[j, i].Selected = true;
+                    }
+                }
         }
     }
 }
-
-//tzikas db 7 meres
-//se ka8e keli epi8eta/onomata ana mera 
-//kai na mporo na kanw stin stili (px deftera) anazitisi ena onoma.posa brike? 
-//arxiki teliki imerominia panw apo dateview gia na 3erw apo pote ksekinaw trexw to programma...kai to current date
-//na exei ena combobox na vazei default onomata apo textbox(8a m ta dosei).na ta krataei ola afta kai na mporo na sviso kiolas
