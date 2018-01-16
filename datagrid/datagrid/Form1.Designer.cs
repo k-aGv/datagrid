@@ -114,7 +114,7 @@
             // lb_start
             // 
             this.lb_start.AutoSize = true;
-            this.lb_start.Location = new System.Drawing.Point(711, 20);
+            this.lb_start.Location = new System.Drawing.Point(596, 20);
             this.lb_start.Name = "lb_start";
             this.lb_start.Size = new System.Drawing.Size(88, 13);
             this.lb_start.TabIndex = 1;
@@ -131,16 +131,16 @@
             // 
             // tb_start
             // 
-            this.tb_start.Location = new System.Drawing.Point(699, 36);
+            this.tb_start.Location = new System.Drawing.Point(599, 37);
             this.tb_start.Name = "tb_start";
-            this.tb_start.Size = new System.Drawing.Size(113, 20);
+            this.tb_start.Size = new System.Drawing.Size(200, 20);
             this.tb_start.TabIndex = 2;
             // 
             // tb_latest
             // 
             this.tb_latest.Location = new System.Drawing.Point(833, 36);
             this.tb_latest.Name = "tb_latest";
-            this.tb_latest.Size = new System.Drawing.Size(100, 20);
+            this.tb_latest.Size = new System.Drawing.Size(199, 20);
             this.tb_latest.TabIndex = 2;
             // 
             // lb_add

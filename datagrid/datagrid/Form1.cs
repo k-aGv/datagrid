@@ -18,6 +18,7 @@ namespace datagrid
             InitializeComponent();
         }
         string _database = Directory.GetCurrentDirectory() + "/db.txt";
+        string _timeStamp = Directory.GetCurrentDirectory() + "/timestamp.txt";
         int remainingRows = 0;
         int counterDuties = 0;
         private void InitUI()
@@ -63,8 +64,22 @@ namespace datagrid
         {
             int column, row;
 
-            StreamWriter _writer;
-            StreamReader _reader;
+            StreamWriter _writer, _writerTimestamp;
+            StreamReader _reader, _readerTimestamp;
+            
+
+            if (!File.Exists(_timeStamp))
+            {
+                _writerTimestamp = new StreamWriter(_timeStamp);
+                _writerTimestamp.WriteLine("StartTime:"+DateTime.Now);
+                tb_start.Text = DateTime.Now +"";
+                _writerTimestamp.Close();
+            }
+            else
+            {
+                _readerTimestamp = new StreamReader(_timeStamp);
+                tb_start.Text = _readerTimestamp.ReadLine().Remove(0, 10); //10 chars -> StartTime
+            }
             if (!File.Exists(_database))
             {
                 _writer = new StreamWriter(_database);
@@ -144,7 +159,6 @@ namespace datagrid
             StreamWriter _writer = new StreamWriter(_database);
             _writer.WriteLine("Columns:" + dataGridView1.Columns.Count);
             _writer.WriteLine("Rows:" + dataGridView1.Rows.Count);
-
             string _grid;
 
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
