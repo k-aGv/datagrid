@@ -19,6 +19,7 @@ namespace datagrid
         }
         string _database = Directory.GetCurrentDirectory() + "/db.txt";
         int remainingRows = 0;
+        int counterDuties = 0;
         private void InitUI()
         {
             string[] days = new string[]
@@ -50,7 +51,7 @@ namespace datagrid
                 lb_add.Font,
                 FontStyle.Underline
                 );
-            lb_ipiresiesResult.Text = 5 + "";
+            lb_ipiresiesResult.Text =  "";
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
         }
 
@@ -174,8 +175,10 @@ namespace datagrid
                     if (_s == tb_search_name.Text)
                     {
                         dataGridView1[j, i].Selected = true;
+                        counterDuties++;
                     }
                 }
+            lb_ipiresiesResult.Text = ""+ counterDuties;
         }
     }
 }
