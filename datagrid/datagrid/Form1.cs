@@ -32,7 +32,10 @@ namespace datagrid
             names = names.Replace(']', ' ');
             char[] delim = { ',' };
             foreach (string item in names.Remove(0, 1).Split(delim, StringSplitOptions.RemoveEmptyEntries))
+            {
                 cbb_add_names.Items.Add(item);
+                cbb_search_days.Items.Add(item);
+            }
             
 
             for (int i = 0; i < 7; i++)
@@ -172,10 +175,22 @@ namespace datagrid
                         _s = dataGridView1[j, i].Value.ToString();
                     }
                     catch { }
-                    if (_s == tb_search_name.Text)
+                    if (tb_search_name.Text != "")
                     {
-                        dataGridView1[j, i].Selected = true;
-                        counterDuties++;
+                       
+                        if (_s == tb_search_name.Text)
+                        {
+                            dataGridView1[j, i].Selected = true;
+                            counterDuties++;
+                        }
+                    }
+                    else
+                    {
+                        if (_s == cbb_search_days.Text)
+                        {
+                            dataGridView1[j, i].Selected = true;
+                            counterDuties++;
+                        }
                     }
                 }
             lb_ipiresiesResult.Text = ""+ counterDuties;
