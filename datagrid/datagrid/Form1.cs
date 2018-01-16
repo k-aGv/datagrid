@@ -50,6 +50,7 @@ namespace datagrid
                 FontStyle.Underline
                 );
             lb_ipiresiesResult.Text = 5 + "";
+            
         }
 
 
@@ -124,8 +125,10 @@ namespace datagrid
 
         private void btn_addRow_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Add();
+            dataGridView1.Rows.Insert(0, "");
         }
+
+       
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
