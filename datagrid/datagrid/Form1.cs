@@ -20,13 +20,16 @@ namespace datagrid
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/_stamps");
             }
+            WindowState = FormWindowState.Maximized;
         }
+        int viewMargin = 10;
         string _database = Directory.GetCurrentDirectory() + "/_stamps/db.txt";
         string _timeStampFirst = Directory.GetCurrentDirectory() + "/_stamps/timestamp.txt";
         string _timeStampCurrent = Directory.GetCurrentDirectory() + "/_stamps/timestampCurrent.txt";
         int counterDuties = 0;
         private void InitUI()
         {
+            MaximizeBox = false;
             string[] days = new string[]
             { "Δευτέρα", "Τρίτη", "Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο","Κυριακή"};
             string names = "[ΧΡΙΣΤΟΔΟΥΛΟΣ,ΓΚΙΟΥΡΣΑΝΗΣ,ΠΑΠΑΓΕΩΡΓΙΟΥ,ΛΙΑΚΟΣ,ΠΟΥΡΝΑΡΑΣ,ΑΝΑΤΟΛΙΤΗΣ,ΒΑΛΑΤΣΟΣ,ΚΑΤΣΑΡΑΣ,ΤΣΙΤΣΙΒΑΣ,ΓΚΟΥΨΖΑΡΑΣ]";
@@ -61,6 +64,14 @@ namespace datagrid
                 );
             lb_ipiresiesResult.Text =  "";
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
+            int w = Size.Width - gb_toolbox.Width - gb_toolbox.Location.X - (dataGridView1.Location.X - gb_toolbox.Width) - viewMargin ;
+            int h = Size.Height - dataGridView1.Location.Y - viewMargin - 50;
+            //-50 for bars and shit
+            dataGridView1.Width = w;
+            dataGridView1.Height = h; 
+            cbb_add_names.DropDownStyle = cbb_search_days.DropDownStyle = ComboBoxStyle.DropDownList;
+            tb_search_name.Visible = false;
+            tb_add_name.Visible = false;
         }
 
 
@@ -230,6 +241,18 @@ namespace datagrid
                     }
                 }
             lb_ipiresiesResult.Text = ""+ counterDuties;
+        }
+
+        private void cb_manualsearch_CheckedChanged(object sender, EventArgs e)
+        {
+            tb_search_name.Visible = cb_manualsearch.Checked;
+            cbb_search_days.Visible = !cb_manualsearch.Checked;
+        }
+
+        private void cb_manualAdd_CheckedChanged(object sender, EventArgs e)
+        {
+            tb_add_name.Visible = cb_manualAdd.Checked;
+            cbb_add_names.Visible = !cb_manualAdd.Checked;
         }
     }
 }

@@ -7,7 +7,6 @@ C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.cspr
 C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csproj.CoreCompileInputs.cache
 C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.exe
 C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.pdb
-C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csprojResolveAssemblyReference.cache
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\bin\Debug\datagrid.exe.config
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\bin\Debug\datagrid.exe
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\bin\Debug\datagrid.pdb
@@ -18,3 +17,4 @@ C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csp
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\obj\Debug\datagrid.exe
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\obj\Debug\datagrid.pdb
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csprojResolveAssemblyReference.cache
+C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csprojResolveAssemblyReference.cache
