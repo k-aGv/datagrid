@@ -16,10 +16,14 @@ namespace datagrid
         public Form1()
         {
             InitializeComponent();
+            if (!Directory.Exists(Directory.GetCurrentDirectory()+"/_stamps"))
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/_stamps");
+            }
         }
-        string _database = Directory.GetCurrentDirectory() + "/db.txt";
-        string _timeStamp = Directory.GetCurrentDirectory() + "/timestamp.txt";
-        int remainingRows = 0;
+        string _database = Directory.GetCurrentDirectory() + "/_stamps/db.txt";
+        string _timeStampFirst = Directory.GetCurrentDirectory() + "/_stamps/timestamp.txt";
+        string _timeStampCurrent = Directory.GetCurrentDirectory() + "/_stamps/timestampCurrent.txt";
         int counterDuties = 0;
         private void InitUI()
         {
@@ -67,17 +71,24 @@ namespace datagrid
             StreamWriter _writer, _writerTimestamp;
             StreamReader _reader, _readerTimestamp;
             
-
-            if (!File.Exists(_timeStamp))
+            if (File.Exists(_timeStampCurrent))
             {
-                _writerTimestamp = new StreamWriter(_timeStamp);
+                _reader = new StreamReader(_timeStampCurrent);
+                tb_latest.Text = _reader.ReadLine();
+                _reader.Close();
+            }
+               
+            
+            if (!File.Exists(_timeStampFirst))
+            {
+                _writerTimestamp = new StreamWriter(_timeStampFirst);
                 _writerTimestamp.WriteLine("StartTime:"+DateTime.Now);
                 tb_start.Text = DateTime.Now +"";
                 _writerTimestamp.Close();
             }
             else
             {
-                _readerTimestamp = new StreamReader(_timeStamp);
+                _readerTimestamp = new StreamReader(_timeStampFirst);
                 tb_start.Text = _readerTimestamp.ReadLine().Remove(0, 10); //10 chars -> StartTime
                 _readerTimestamp.Close();
             }
@@ -135,6 +146,14 @@ namespace datagrid
 
             foreach (DataGridViewCell _c in dataGridView1.SelectedCells)
                 _c.Value = cbb_add_names.Text;
+
+            if (File.Exists(_timeStampCurrent)) File.Delete(_timeStampCurrent);
+            StreamWriter _writeCurrentTime = new StreamWriter(_timeStampCurrent);
+            DateTime date = DateTime.Now;
+            _writeCurrentTime.WriteLine(date);
+            tb_latest.Text = date + "";
+            _writeCurrentTime.Close();
+
         }
 
         private void tb_add_name_TextChanged(object sender, EventArgs e)
@@ -146,11 +165,13 @@ namespace datagrid
         
         private void btn_addRow_Click(object sender, EventArgs e)
         {
-           
-            dataGridView1.Rows[dataGridView1.Rows.Count - 1 - remainingRows].DefaultCellStyle.BackColor = Color.LightGray;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.DefaultCellStyle.BackColor = Color.White;
+            }
             dataGridView1.Rows.Insert(0, "");
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
-            remainingRows++;
+
         }
 
        
