@@ -21,6 +21,7 @@ namespace datagrid
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/_stamps");
             }
             WindowState = FormWindowState.Maximized;
+            
         }
         int viewMargin = 10;
         string _database = Directory.GetCurrentDirectory() + "/_stamps/db.txt";
@@ -29,7 +30,7 @@ namespace datagrid
         int counterDuties = 0;
         private void InitUI()
         {
-            MaximizeBox = false;
+            //MaximizeBox = false;
             string[] days = new string[]
             { "Δευτέρα", "Τρίτη", "Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο","Κυριακή"};
             string names = "[ΧΡΙΣΤΟΔΟΥΛΟΣ,ΓΚΙΟΥΡΣΑΝΗΣ,ΠΑΠΑΓΕΩΡΓΙΟΥ,ΛΙΑΚΟΣ,ΠΟΥΡΝΑΡΑΣ,ΑΝΑΤΟΛΙΤΗΣ,ΒΑΛΑΤΣΟΣ,ΚΑΤΣΑΡΑΣ,ΤΣΙΤΣΙΒΑΣ,ΓΚΟΥΨΖΑΡΑΣ]";
@@ -44,17 +45,18 @@ namespace datagrid
                 cbb_add_names.Items.Add(item);
                 cbb_search_days.Items.Add(item);
             }
-            
 
+            int _w = 0;
             for (int i = 0; i < 7; i++)
             {
                 dataGridView1.Columns[i].HeaderText = days[i];
                 dataGridView1.Columns[i].Width = 150;
+                _w += dataGridView1.Columns[i].Width;
             }
 
 
-            tb_latest.ReadOnly = true;
-            tb_start.ReadOnly = true;
+            tb_latest.Enabled = false;
+            tb_start.Enabled = false;
             dataGridView1.ScrollBars = ScrollBars.Both;
             lb_add.Font =
                 new Font
@@ -72,6 +74,14 @@ namespace datagrid
             cbb_add_names.DropDownStyle = cbb_search_days.DropDownStyle = ComboBoxStyle.DropDownList;
             tb_search_name.Visible = false;
             tb_add_name.Visible = false;
+
+
+
+            WindowState = FormWindowState.Normal;
+            dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
+            Width = dataGridView1.Location.X + dataGridView1.Width + 30;
+            dataGridView1.Height = gb_toolbox.Height - 7; //allign the bottom of DataGridView with the bottom of gb_toolbox
+            
         }
 
 
@@ -149,14 +159,29 @@ namespace datagrid
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            if (cbb_add_names.SelectedIndex == -1)
+            if (!cb_manualAdd.Checked)
             {
-                MessageBox.Show("Δεν έχετε επιλέξει όνομα.");
-                return;
+                if (cbb_add_names.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Δεν έχετε επιλέξει όνομα.");
+                    return;
+                }
+                else
+                    foreach (DataGridViewCell _c in dataGridView1.SelectedCells)
+                        _c.Value = cbb_add_names.Text;
+            }
+            else
+            {
+                if(tb_add_name.Text=="")
+                {
+                    MessageBox.Show("Δεν έχετε επιλέξει όνομα.");
+                    return;
+                }
+                foreach (DataGridViewCell _c in dataGridView1.SelectedCells)
+                    _c.Value = tb_add_name.Text;
             }
 
-            foreach (DataGridViewCell _c in dataGridView1.SelectedCells)
-                _c.Value = cbb_add_names.Text;
+            
 
             if (File.Exists(_timeStampCurrent)) File.Delete(_timeStampCurrent);
             StreamWriter _writeCurrentTime = new StreamWriter(_timeStampCurrent);
@@ -253,6 +278,15 @@ namespace datagrid
         {
             tb_add_name.Visible = cb_manualAdd.Checked;
             cbb_add_names.Visible = !cb_manualAdd.Checked;
+        }
+
+        private void dataGridView1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            int _w = 0;
+            foreach (DataGridViewColumn item in dataGridView1.Columns)
+                _w += item.Width;
+            dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
+            Width = dataGridView1.Location.X + dataGridView1.Width + 30;
         }
     }
 }

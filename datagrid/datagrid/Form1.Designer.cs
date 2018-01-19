@@ -42,22 +42,22 @@
             this.tb_latest = new System.Windows.Forms.TextBox();
             this.lb_add = new System.Windows.Forms.Label();
             this.gb_toolbox = new System.Windows.Forms.GroupBox();
-            this.lb_ipiresiesResult = new System.Windows.Forms.Label();
-            this.lb_ipiresies = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cb_manualAdd = new System.Windows.Forms.CheckBox();
+            this.lb_names = new System.Windows.Forms.Label();
             this.btn_add = new System.Windows.Forms.Button();
             this.cbb_add_names = new System.Windows.Forms.ComboBox();
             this.tb_add_name = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cb_manualsearch = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lb_ipiresiesResult = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
+            this.lb_ipiresies = new System.Windows.Forms.Label();
             this.tb_search_name = new System.Windows.Forms.TextBox();
             this.lb_search = new System.Windows.Forms.Label();
             this.cbb_search_days = new System.Windows.Forms.ComboBox();
             this.btn_addRow = new System.Windows.Forms.Button();
-            this.lb_names = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cb_manualsearch = new System.Windows.Forms.CheckBox();
-            this.cb_manualAdd = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gb_toolbox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -75,10 +75,11 @@
             this.Column5,
             this.Column6,
             this.Column7});
-            this.dataGridView1.Location = new System.Drawing.Point(290, 63);
+            this.dataGridView1.Location = new System.Drawing.Point(287, 54);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(745, 473);
+            this.dataGridView1.Size = new System.Drawing.Size(745, 434);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnWidthChanged);
             // 
             // Column1
             // 
@@ -118,7 +119,7 @@
             // lb_start
             // 
             this.lb_start.AutoSize = true;
-            this.lb_start.Location = new System.Drawing.Point(537, 20);
+            this.lb_start.Location = new System.Drawing.Point(421, 11);
             this.lb_start.Name = "lb_start";
             this.lb_start.Size = new System.Drawing.Size(88, 13);
             this.lb_start.TabIndex = 1;
@@ -127,7 +128,7 @@
             // lb_latest
             // 
             this.lb_latest.AutoSize = true;
-            this.lb_latest.Location = new System.Drawing.Point(771, 20);
+            this.lb_latest.Location = new System.Drawing.Point(567, 11);
             this.lb_latest.Name = "lb_latest";
             this.lb_latest.Size = new System.Drawing.Size(107, 13);
             this.lb_latest.TabIndex = 1;
@@ -135,16 +136,16 @@
             // 
             // tb_start
             // 
-            this.tb_start.Location = new System.Drawing.Point(540, 37);
+            this.tb_start.Location = new System.Drawing.Point(424, 26);
             this.tb_start.Name = "tb_start";
-            this.tb_start.Size = new System.Drawing.Size(200, 20);
+            this.tb_start.Size = new System.Drawing.Size(134, 20);
             this.tb_start.TabIndex = 2;
             // 
             // tb_latest
             // 
-            this.tb_latest.Location = new System.Drawing.Point(774, 36);
+            this.tb_latest.Location = new System.Drawing.Point(570, 26);
             this.tb_latest.Name = "tb_latest";
-            this.tb_latest.Size = new System.Drawing.Size(199, 20);
+            this.tb_latest.Size = new System.Drawing.Size(134, 20);
             this.tb_latest.TabIndex = 2;
             // 
             // lb_add
@@ -167,24 +168,6 @@
             this.gb_toolbox.TabStop = false;
             this.gb_toolbox.Text = "Επιλογές";
             // 
-            // lb_ipiresiesResult
-            // 
-            this.lb_ipiresiesResult.AutoSize = true;
-            this.lb_ipiresiesResult.Location = new System.Drawing.Point(113, 114);
-            this.lb_ipiresiesResult.Name = "lb_ipiresiesResult";
-            this.lb_ipiresiesResult.Size = new System.Drawing.Size(35, 13);
-            this.lb_ipiresiesResult.TabIndex = 7;
-            this.lb_ipiresiesResult.Text = "label1";
-            // 
-            // lb_ipiresies
-            // 
-            this.lb_ipiresies.AutoSize = true;
-            this.lb_ipiresies.Location = new System.Drawing.Point(7, 114);
-            this.lb_ipiresies.Name = "lb_ipiresies";
-            this.lb_ipiresies.Size = new System.Drawing.Size(103, 13);
-            this.lb_ipiresies.TabIndex = 6;
-            this.lb_ipiresies.Text = "Πλήθος υπηρεσιών:";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cb_manualAdd);
@@ -198,6 +181,26 @@
             this.groupBox1.Size = new System.Drawing.Size(258, 158);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
+            // 
+            // cb_manualAdd
+            // 
+            this.cb_manualAdd.AutoSize = true;
+            this.cb_manualAdd.Location = new System.Drawing.Point(140, 57);
+            this.cb_manualAdd.Name = "cb_manualAdd";
+            this.cb_manualAdd.Size = new System.Drawing.Size(86, 17);
+            this.cb_manualAdd.TabIndex = 13;
+            this.cb_manualAdd.Text = "Χειροκίνητο";
+            this.cb_manualAdd.UseVisualStyleBackColor = true;
+            this.cb_manualAdd.CheckedChanged += new System.EventHandler(this.cb_manualAdd_CheckedChanged);
+            // 
+            // lb_names
+            // 
+            this.lb_names.AutoSize = true;
+            this.lb_names.Location = new System.Drawing.Point(6, 57);
+            this.lb_names.Name = "lb_names";
+            this.lb_names.Size = new System.Drawing.Size(90, 13);
+            this.lb_names.TabIndex = 10;
+            this.lb_names.Text = "Ονοματεπώνυμα";
             // 
             // btn_add
             // 
@@ -241,6 +244,35 @@
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             // 
+            // cb_manualsearch
+            // 
+            this.cb_manualsearch.AutoSize = true;
+            this.cb_manualsearch.Location = new System.Drawing.Point(154, 49);
+            this.cb_manualsearch.Name = "cb_manualsearch";
+            this.cb_manualsearch.Size = new System.Drawing.Size(86, 17);
+            this.cb_manualsearch.TabIndex = 12;
+            this.cb_manualsearch.Text = "Χειροκίνητο";
+            this.cb_manualsearch.UseVisualStyleBackColor = true;
+            this.cb_manualsearch.CheckedChanged += new System.EventHandler(this.cb_manualsearch_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Ονοματεπώνυμα";
+            // 
+            // lb_ipiresiesResult
+            // 
+            this.lb_ipiresiesResult.AutoSize = true;
+            this.lb_ipiresiesResult.Location = new System.Drawing.Point(113, 114);
+            this.lb_ipiresiesResult.Name = "lb_ipiresiesResult";
+            this.lb_ipiresiesResult.Size = new System.Drawing.Size(35, 13);
+            this.lb_ipiresiesResult.TabIndex = 7;
+            this.lb_ipiresiesResult.Text = "label1";
+            // 
             // btn_search
             // 
             this.btn_search.Location = new System.Drawing.Point(154, 74);
@@ -250,6 +282,15 @@
             this.btn_search.Text = "Αναζήτηση";
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // lb_ipiresies
+            // 
+            this.lb_ipiresies.AutoSize = true;
+            this.lb_ipiresies.Location = new System.Drawing.Point(7, 114);
+            this.lb_ipiresies.Name = "lb_ipiresies";
+            this.lb_ipiresies.Size = new System.Drawing.Size(103, 13);
+            this.lb_ipiresies.TabIndex = 6;
+            this.lb_ipiresies.Text = "Πλήθος υπηρεσιών:";
             // 
             // tb_search_name
             // 
@@ -277,59 +318,19 @@
             // 
             // btn_addRow
             // 
-            this.btn_addRow.Location = new System.Drawing.Point(290, 33);
+            this.btn_addRow.Location = new System.Drawing.Point(287, 12);
             this.btn_addRow.Name = "btn_addRow";
-            this.btn_addRow.Size = new System.Drawing.Size(131, 23);
+            this.btn_addRow.Size = new System.Drawing.Size(131, 35);
             this.btn_addRow.TabIndex = 6;
             this.btn_addRow.Text = "Προσθήκη σειράς";
             this.btn_addRow.UseVisualStyleBackColor = true;
             this.btn_addRow.Click += new System.EventHandler(this.btn_addRow_Click);
             // 
-            // lb_names
-            // 
-            this.lb_names.AutoSize = true;
-            this.lb_names.Location = new System.Drawing.Point(6, 57);
-            this.lb_names.Name = "lb_names";
-            this.lb_names.Size = new System.Drawing.Size(90, 13);
-            this.lb_names.TabIndex = 10;
-            this.lb_names.Text = "Ονοματεπώνυμα";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Ονοματεπώνυμα";
-            // 
-            // cb_manualsearch
-            // 
-            this.cb_manualsearch.AutoSize = true;
-            this.cb_manualsearch.Location = new System.Drawing.Point(154, 49);
-            this.cb_manualsearch.Name = "cb_manualsearch";
-            this.cb_manualsearch.Size = new System.Drawing.Size(86, 17);
-            this.cb_manualsearch.TabIndex = 12;
-            this.cb_manualsearch.Text = "Χειροκίνητο";
-            this.cb_manualsearch.UseVisualStyleBackColor = true;
-            this.cb_manualsearch.CheckedChanged += new System.EventHandler(this.cb_manualsearch_CheckedChanged);
-            // 
-            // cb_manualAdd
-            // 
-            this.cb_manualAdd.AutoSize = true;
-            this.cb_manualAdd.Location = new System.Drawing.Point(140, 57);
-            this.cb_manualAdd.Name = "cb_manualAdd";
-            this.cb_manualAdd.Size = new System.Drawing.Size(86, 17);
-            this.cb_manualAdd.TabIndex = 13;
-            this.cb_manualAdd.Text = "Χειροκίνητο";
-            this.cb_manualAdd.UseVisualStyleBackColor = true;
-            this.cb_manualAdd.CheckedChanged += new System.EventHandler(this.cb_manualAdd_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1121, 548);
+            this.ClientSize = new System.Drawing.Size(1041, 500);
             this.Controls.Add(this.btn_addRow);
             this.Controls.Add(this.tb_latest);
             this.Controls.Add(this.tb_start);
