@@ -234,6 +234,7 @@ namespace datagrid
 
         private void btn_search_Click(object sender, EventArgs e)
         {
+            counterDuties = 0;
             foreach (DataGridViewCell item in dataGridView1.SelectedCells)
             {
                 item.Selected = false;
