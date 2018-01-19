@@ -58,10 +58,13 @@
             this.lb_search = new System.Windows.Forms.Label();
             this.cbb_search_days = new System.Windows.Forms.ComboBox();
             this.btn_addRow = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gb_toolbox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -79,6 +82,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(745, 434);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnWidthChanged);
             // 
             // Column1
@@ -151,7 +155,7 @@
             // lb_add
             // 
             this.lb_add.AutoSize = true;
-            this.lb_add.Location = new System.Drawing.Point(97, 16);
+            this.lb_add.Location = new System.Drawing.Point(97, 13);
             this.lb_add.Name = "lb_add";
             this.lb_add.Size = new System.Drawing.Size(56, 13);
             this.lb_add.TabIndex = 3;
@@ -159,6 +163,7 @@
             // 
             // gb_toolbox
             // 
+            this.gb_toolbox.Controls.Add(this.groupBox3);
             this.gb_toolbox.Controls.Add(this.groupBox1);
             this.gb_toolbox.Controls.Add(this.groupBox2);
             this.gb_toolbox.Location = new System.Drawing.Point(13, 48);
@@ -178,14 +183,14 @@
             this.groupBox1.Controls.Add(this.lb_add);
             this.groupBox1.Location = new System.Drawing.Point(7, 15);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(258, 158);
+            this.groupBox1.Size = new System.Drawing.Size(258, 133);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             // 
             // cb_manualAdd
             // 
             this.cb_manualAdd.AutoSize = true;
-            this.cb_manualAdd.Location = new System.Drawing.Point(140, 57);
+            this.cb_manualAdd.Location = new System.Drawing.Point(140, 29);
             this.cb_manualAdd.Name = "cb_manualAdd";
             this.cb_manualAdd.Size = new System.Drawing.Size(86, 17);
             this.cb_manualAdd.TabIndex = 13;
@@ -196,7 +201,7 @@
             // lb_names
             // 
             this.lb_names.AutoSize = true;
-            this.lb_names.Location = new System.Drawing.Point(6, 57);
+            this.lb_names.Location = new System.Drawing.Point(6, 29);
             this.lb_names.Name = "lb_names";
             this.lb_names.Size = new System.Drawing.Size(90, 13);
             this.lb_names.TabIndex = 10;
@@ -204,7 +209,7 @@
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(6, 129);
+            this.btn_add.Location = new System.Drawing.Point(6, 101);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(85, 23);
             this.btn_add.TabIndex = 9;
@@ -215,14 +220,14 @@
             // cbb_add_names
             // 
             this.cbb_add_names.FormattingEnabled = true;
-            this.cbb_add_names.Location = new System.Drawing.Point(6, 76);
+            this.cbb_add_names.Location = new System.Drawing.Point(6, 48);
             this.cbb_add_names.Name = "cbb_add_names";
             this.cbb_add_names.Size = new System.Drawing.Size(220, 21);
             this.cbb_add_names.TabIndex = 4;
             // 
             // tb_add_name
             // 
-            this.tb_add_name.Location = new System.Drawing.Point(6, 103);
+            this.tb_add_name.Location = new System.Drawing.Point(6, 75);
             this.tb_add_name.Name = "tb_add_name";
             this.tb_add_name.Size = new System.Drawing.Size(220, 20);
             this.tb_add_name.TabIndex = 5;
@@ -238,16 +243,16 @@
             this.groupBox2.Controls.Add(this.tb_search_name);
             this.groupBox2.Controls.Add(this.lb_search);
             this.groupBox2.Controls.Add(this.cbb_search_days);
-            this.groupBox2.Location = new System.Drawing.Point(6, 301);
+            this.groupBox2.Location = new System.Drawing.Point(6, 321);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(258, 133);
+            this.groupBox2.Size = new System.Drawing.Size(258, 113);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             // 
             // cb_manualsearch
             // 
             this.cb_manualsearch.AutoSize = true;
-            this.cb_manualsearch.Location = new System.Drawing.Point(154, 49);
+            this.cb_manualsearch.Location = new System.Drawing.Point(153, 45);
             this.cb_manualsearch.Name = "cb_manualsearch";
             this.cb_manualsearch.Size = new System.Drawing.Size(86, 17);
             this.cb_manualsearch.TabIndex = 12;
@@ -258,7 +263,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 49);
+            this.label1.Location = new System.Drawing.Point(6, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 13);
             this.label1.TabIndex = 11;
@@ -267,7 +272,7 @@
             // lb_ipiresiesResult
             // 
             this.lb_ipiresiesResult.AutoSize = true;
-            this.lb_ipiresiesResult.Location = new System.Drawing.Point(113, 114);
+            this.lb_ipiresiesResult.Location = new System.Drawing.Point(113, 94);
             this.lb_ipiresiesResult.Name = "lb_ipiresiesResult";
             this.lb_ipiresiesResult.Size = new System.Drawing.Size(35, 13);
             this.lb_ipiresiesResult.TabIndex = 7;
@@ -275,7 +280,7 @@
             // 
             // btn_search
             // 
-            this.btn_search.Location = new System.Drawing.Point(154, 74);
+            this.btn_search.Location = new System.Drawing.Point(154, 68);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(85, 23);
             this.btn_search.TabIndex = 8;
@@ -286,7 +291,7 @@
             // lb_ipiresies
             // 
             this.lb_ipiresies.AutoSize = true;
-            this.lb_ipiresies.Location = new System.Drawing.Point(7, 114);
+            this.lb_ipiresies.Location = new System.Drawing.Point(7, 94);
             this.lb_ipiresies.Name = "lb_ipiresies";
             this.lb_ipiresies.Size = new System.Drawing.Size(103, 13);
             this.lb_ipiresies.TabIndex = 6;
@@ -294,7 +299,7 @@
             // 
             // tb_search_name
             // 
-            this.tb_search_name.Location = new System.Drawing.Point(7, 91);
+            this.tb_search_name.Location = new System.Drawing.Point(7, 71);
             this.tb_search_name.Name = "tb_search_name";
             this.tb_search_name.Size = new System.Drawing.Size(141, 20);
             this.tb_search_name.TabIndex = 5;
@@ -302,7 +307,7 @@
             // lb_search
             // 
             this.lb_search.AutoSize = true;
-            this.lb_search.Location = new System.Drawing.Point(97, 16);
+            this.lb_search.Location = new System.Drawing.Point(98, 16);
             this.lb_search.Name = "lb_search";
             this.lb_search.Size = new System.Drawing.Size(63, 13);
             this.lb_search.TabIndex = 3;
@@ -311,7 +316,7 @@
             // cbb_search_days
             // 
             this.cbb_search_days.FormattingEnabled = true;
-            this.cbb_search_days.Location = new System.Drawing.Point(7, 65);
+            this.cbb_search_days.Location = new System.Drawing.Point(7, 45);
             this.cbb_search_days.Name = "cbb_search_days";
             this.cbb_search_days.Size = new System.Drawing.Size(141, 21);
             this.cbb_search_days.TabIndex = 4;
@@ -325,6 +330,25 @@
             this.btn_addRow.Text = "Προσθήκη σειράς";
             this.btn_addRow.UseVisualStyleBackColor = true;
             this.btn_addRow.Click += new System.EventHandler(this.btn_addRow_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.listBox1);
+            this.groupBox3.Location = new System.Drawing.Point(7, 154);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(160, 172);
+            this.groupBox3.TabIndex = 11;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Υπηρεσίες";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(8, 20);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(145, 147);
+            this.listBox1.TabIndex = 0;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -349,6 +373,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,6 +411,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cb_manualsearch;
         private System.Windows.Forms.CheckBox cb_manualAdd;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

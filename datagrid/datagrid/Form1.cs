@@ -81,6 +81,8 @@ namespace datagrid
             dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
             dataGridView1.Height = gb_toolbox.Height - 7; //allign the bottom of DataGridView with the bottom of gb_toolbox
+
+            services();
             
         }
 
@@ -234,39 +236,7 @@ namespace datagrid
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            counterDuties = 0;
-            foreach (DataGridViewCell item in dataGridView1.SelectedCells)
-            {
-                item.Selected = false;
-            }
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                for (int j = 0; j < dataGridView1.Columns.Count; j++)
-                {
-                    string _s = "";
-                    try
-                    {
-                        _s = dataGridView1[j, i].Value.ToString();
-                    }
-                    catch { }
-                    if (tb_search_name.Text != "")
-                    {
-                       
-                        if (_s == tb_search_name.Text)
-                        {
-                            dataGridView1[j, i].Selected = true;
-                            counterDuties++;
-                        }
-                    }
-                    else
-                    {
-                        if (_s == cbb_search_days.Text)
-                        {
-                            dataGridView1[j, i].Selected = true;
-                            counterDuties++;
-                        }
-                    }
-                }
-            lb_ipiresiesResult.Text = ""+ counterDuties;
+            
         }
 
         private void cb_manualsearch_CheckedChanged(object sender, EventArgs e)
@@ -289,5 +259,115 @@ namespace datagrid
             dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
         }
+
+        private void services()
+        {
+            int[] _soldiers = new int[cbb_add_names.Items.Count];
+            string[,] _values = new string[dataGridView1.Columns.Count, dataGridView1.Rows.Count];
+            listBox1.Items.Clear();
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                {
+                    if (dataGridView1[j, i].Value == null)
+                    {
+                        _values[j, i] = "";
+                    }
+                    else
+                    {
+                        _values[j, i] = dataGridView1[j, i].Value.ToString();
+                    }
+                }
+
+            for (int p = 0; p < cbb_add_names.Items.Count; p++)
+            {
+                for (int i = 0; i < _values.GetLength(0); i++)
+                    for (int j = 0; j < _values.GetLength(1); j++)
+                    {
+                        if (_values[i, j] == cbb_add_names.Items[p].ToString())
+                        {
+                            _soldiers[p]++;
+                        }
+                    }
+                object _o = cbb_add_names.Items[p] + ": " + _soldiers[p];
+                listBox1.Items.Add(_o);
+            }
+        }
+        private void services_select()
+        {
+            counterDuties = 0;
+            foreach (DataGridViewCell item in dataGridView1.SelectedCells)
+            {
+                item.Selected = false;
+            }
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                {
+                    string _s = "";
+                    try
+                    {
+                        _s = dataGridView1[j, i].Value.ToString();
+                    }
+                    catch { }
+                    if (tb_search_name.Text != "")
+                    {
+
+                        if (_s == tb_search_name.Text)
+                        {
+                            dataGridView1[j, i].Selected = true;
+                            counterDuties++;
+                        }
+                    }
+                    else
+                    {
+                        if (_s == cbb_search_days.Text)
+                        {
+                            dataGridView1[j, i].Selected = true;
+                            counterDuties++;
+                        }
+                    }
+                }
+            lb_ipiresiesResult.Text = "" + counterDuties;
+        }
+
+        private void services_select(string _s1)
+        {
+            counterDuties = 0;
+            foreach (DataGridViewCell item in dataGridView1.SelectedCells)
+            {
+                item.Selected = false;
+            }
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                {
+                    string _s = "";
+                    try
+                    {
+                        _s = dataGridView1[j, i].Value.ToString();
+                    }
+                    catch { }
+                    if (_s == _s1)
+                    {
+                        dataGridView1[j, i].Selected = true;
+                        counterDuties++;
+                    }
+
+                }
+            lb_ipiresiesResult.Text = "" + counterDuties;
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            services();
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] _s = listBox1.SelectedItem.ToString().Split(':');
+            services_select(_s[0]);
+            
+        }
+
+        
     }
 }
