@@ -16,14 +16,16 @@ namespace datagrid
         public Form1()
         {
             InitializeComponent();
-            if (!Directory.Exists(Directory.GetCurrentDirectory()+"/_stamps"))
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + "/_stamps"))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/_stamps");
             }
             WindowState = FormWindowState.Maximized;
-            
+            _reset = false;
+
         }
         int viewMargin = 10;
+        bool _reset;
         string _database = Directory.GetCurrentDirectory() + "/_stamps/db.txt";
         string _timeStampFirst = Directory.GetCurrentDirectory() + "/_stamps/timestamp.txt";
         string _timeStampCurrent = Directory.GetCurrentDirectory() + "/_stamps/timestampCurrent.txt";
@@ -64,26 +66,27 @@ namespace datagrid
                 lb_add.Font,
                 FontStyle.Underline
                 );
-            lb_ipiresiesResult.Text =  "";
+            lb_ipiresiesResult.Text = "";
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
-            int w = Size.Width - gb_toolbox.Width - gb_toolbox.Location.X - (dataGridView1.Location.X - gb_toolbox.Width) - viewMargin ;
+            int w = Size.Width - gb_toolbox.Width - gb_toolbox.Location.X - (dataGridView1.Location.X - gb_toolbox.Width) - viewMargin;
             int h = Size.Height - dataGridView1.Location.Y - viewMargin - 50;
             //-50 for bars and shit
             dataGridView1.Width = w;
-            dataGridView1.Height = h; 
+            dataGridView1.Height = h;
             cbb_add_names.DropDownStyle = cbb_search_days.DropDownStyle = ComboBoxStyle.DropDownList;
             tb_search_name.Visible = false;
             tb_add_name.Visible = false;
 
 
-
+            btn_Reset.BackColor = Color.FromArgb(255, 51, 51);
             WindowState = FormWindowState.Normal;
             dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
             dataGridView1.Height = gb_toolbox.Height - 7; //allign the bottom of DataGridView with the bottom of gb_toolbox
-
+            //btn_Reset.Location.X = dataGridView1.Location.X - btn_Reset.Width;
+            btn_Reset.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_Reset.Location.Y);
             services();
-            
+
         }
 
 
@@ -93,20 +96,20 @@ namespace datagrid
 
             StreamWriter _writer, _writerTimestamp;
             StreamReader _reader, _readerTimestamp;
-            
+
             if (File.Exists(_timeStampCurrent))
             {
                 _reader = new StreamReader(_timeStampCurrent);
                 tb_latest.Text = _reader.ReadLine();
                 _reader.Close();
             }
-               
-            
+
+
             if (!File.Exists(_timeStampFirst))
             {
                 _writerTimestamp = new StreamWriter(_timeStampFirst);
-                _writerTimestamp.WriteLine("StartTime:"+DateTime.Now);
-                tb_start.Text = DateTime.Now +"";
+                _writerTimestamp.WriteLine("StartTime:" + DateTime.Now);
+                tb_start.Text = DateTime.Now + "";
                 _writerTimestamp.Close();
             }
             else
@@ -174,7 +177,7 @@ namespace datagrid
             }
             else
             {
-                if(tb_add_name.Text=="")
+                if (tb_add_name.Text == "")
                 {
                     MessageBox.Show("Δεν έχετε επιλέξει όνομα.");
                     return;
@@ -183,7 +186,7 @@ namespace datagrid
                     _c.Value = tb_add_name.Text;
             }
 
-            
+
 
             if (File.Exists(_timeStampCurrent)) File.Delete(_timeStampCurrent);
             StreamWriter _writeCurrentTime = new StreamWriter(_timeStampCurrent);
@@ -200,7 +203,7 @@ namespace datagrid
                 if (item.Contains(tb_add_name.Text))
                     cbb_add_names.SelectedItem = item;
         }
-        
+
         private void btn_addRow_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -212,10 +215,13 @@ namespace datagrid
 
         }
 
-       
+
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_reset)
+                return;
+
             StreamWriter _writer = new StreamWriter(_database);
             _writer.WriteLine("Columns:" + dataGridView1.Columns.Count);
             _writer.WriteLine("Rows:" + dataGridView1.Rows.Count);
@@ -236,12 +242,13 @@ namespace datagrid
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            
+            services_select();
         }
 
         private void cb_manualsearch_CheckedChanged(object sender, EventArgs e)
         {
             tb_search_name.Visible = cb_manualsearch.Checked;
+            tb_search_name.Text = "";
             cbb_search_days.Visible = !cb_manualsearch.Checked;
         }
 
@@ -258,6 +265,7 @@ namespace datagrid
                 _w += item.Width;
             dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
+            btn_Reset.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_Reset.Location.Y);
         }
 
         private void services()
@@ -365,9 +373,50 @@ namespace datagrid
         {
             string[] _s = listBox1.SelectedItem.ToString().Split(':');
             services_select(_s[0]);
-            
+
+        }
+        
+        private void btn_Reset_Click(object sender, EventArgs e)
+        {
+            DialogResult _dg = MessageBox.Show(
+                "Η επιλογή θα διαγράψει όλα τα δεδομένα που έχετε καταχωρήσει.\n" +
+                "Η διαδικασία δεν είναι αναστρέψιμη.\n" +
+                "Επιβαιβεώστε πως θέλετε να συνεχίσετε την διαγραφή.",
+
+                "Διαγραφη δεδομένων",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning);
+
+            if (_dg == DialogResult.OK)
+            {
+                File.Delete(_timeStampCurrent);
+                File.Delete(_timeStampFirst);
+                File.Delete(_database);
+                _reset = true;
+                MessageBox.Show("" +
+                    "Θα γίνει επανεκκίνηση της εφαρμογής για να ολοκληρωθεί\n" +
+                    "η διαδικασία διαγραφής δεδομένον", "Διαγραφή δεδομένων",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                Application.Restart();
+            }
+            else
+            {
+                MessageBox.Show("Η διαδικασία διαγραφής δεδομένων ακυρώθηκε.", "Διαγραφή δεδομένων", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
         }
 
-        
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "Delete")
+                foreach (DataGridViewCell item in dataGridView1.SelectedCells)
+                {
+                    item.Value = "";
+                    item.Selected = false;
+                }
+        }
     }
 }
