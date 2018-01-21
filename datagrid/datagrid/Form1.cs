@@ -66,12 +66,19 @@ namespace datagrid
 
             tb_latest.Enabled = false;
             dataGridView1.ScrollBars = ScrollBars.Both;
+            lb_start.Font = lb_latest.Font =
             lb_add.Font =
                 new Font
                 (
                 lb_add.Font,
-                FontStyle.Underline
+                FontStyle.Underline | FontStyle.Bold
                 );
+            lb_search.Font =
+               new Font
+               (
+               lb_search.Font,
+               FontStyle.Underline | FontStyle.Bold
+               );
             lb_ipiresiesResult.Text = "";
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
             int w = Size.Width - gb_toolbox.Width - gb_toolbox.Location.X - (dataGridView1.Location.X - gb_toolbox.Width) - viewMargin;
@@ -112,6 +119,7 @@ namespace datagrid
             IntPtr pIcon = b.GetHicon();
             Icon z = Icon.FromHandle(pIcon);
             Icon = z;
+
         }
 
 
