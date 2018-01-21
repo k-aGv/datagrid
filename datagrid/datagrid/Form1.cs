@@ -13,25 +13,25 @@ namespace datagrid
 {
     public partial class Form1 : Form
     {
+        int viewMargin = 10;
+        bool _reset;
+        static string _disDir = Directory.GetCurrentDirectory();
+        string _database = _disDir + "/res/_stamps/db.txt";
+        string _timeStampFirst = _disDir + "/res/_stamps/timestamp.txt";
+        string _timeStampCurrent = _disDir + "/res/_stamps/timestampCurrent.txt";
+        string _camoDir = _disDir + "/res/camo.jpg";
+        string _iconDir = _disDir + "/res/icon.ico";
+        int counterDuties = 0;
+
         public Form1()
         {
             InitializeComponent();
-            if (!Directory.Exists(Directory.GetCurrentDirectory() + "/_stamps"))
-            {
-                Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/_stamps");
-            }
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + "/res/_stamps"))
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/res/_stamps");
             WindowState = FormWindowState.Maximized;
             _reset = false;
-
         }
-        int viewMargin = 10;
-        bool _reset;
-        string _database = Directory.GetCurrentDirectory() + "/_stamps/db.txt";
-        string _timeStampFirst = Directory.GetCurrentDirectory() + "/_stamps/timestamp.txt";
-        string _timeStampCurrent = Directory.GetCurrentDirectory() + "/_stamps/timestampCurrent.txt";
-        string _camoDir = Directory.GetCurrentDirectory() + "/res/camo.jpg";
-        string _iconDir = Directory.GetCurrentDirectory() + "/res/icon.ico";
-        int counterDuties = 0;
+      
         private void InitUI()
         {
 
@@ -98,7 +98,7 @@ namespace datagrid
             tb_search_name.CharacterCasing = CharacterCasing.Upper;
             tb_add_name.CharacterCasing = CharacterCasing.Upper;
             Text = "3ΛΠ-Ελασσόνα";
-            this.BackgroundImage = Image.FromFile(_camoDir);
+            BackgroundImage = Image.FromFile(_camoDir);
             cb_reset.BackColor = lb_latest.BackColor = lb_start.BackColor = gb_toolbox.BackColor = Color.Transparent;
             cb_reset.ForeColor = lb_latest.ForeColor = lb_start.ForeColor = 
             lb_ipiresies.ForeColor = lb_ipiresiesResult.ForeColor = 
@@ -413,9 +413,10 @@ namespace datagrid
 
             if (_dg == DialogResult.Yes)
             {
-                if (Directory.Exists(Directory.GetCurrentDirectory() + "/_stamps"))
-                    Directory.Delete(Directory.GetCurrentDirectory() + "/_stamps", true);
-
+                if (File.Exists(_database)) File.Delete(_database);
+                if (File.Exists(_timeStampCurrent)) File.Delete(_timeStampCurrent);
+                if (File.Exists(_timeStampFirst)) File.Delete(_timeStampFirst);
+             
                 _reset = true;
                 MessageBox.Show("" +
                     "Θα γίνει επανεκκίνηση της εφαρμογής για να ολοκληρωθεί\n" +
