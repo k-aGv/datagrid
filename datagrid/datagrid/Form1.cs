@@ -415,13 +415,17 @@ namespace datagrid
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
+            int grabbedRow = -1; 
             if (e.KeyCode.ToString() == "Delete")
+            {
                 foreach (DataGridViewCell item in dataGridView1.SelectedCells)
                 {
                     item.Value = "";
                     item.Selected = false;
-
+                    grabbedRow = item.RowIndex;
                 }
+                dataGridView1.Rows.RemoveAt(grabbedRow);
+            }
         }
 
         private void cb_reset_CheckedChanged(object sender, EventArgs e)
