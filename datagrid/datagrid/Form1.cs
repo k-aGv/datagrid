@@ -30,7 +30,7 @@ namespace datagrid
         string _timeStampFirst = Directory.GetCurrentDirectory() + "/_stamps/timestamp.txt";
         string _timeStampCurrent = Directory.GetCurrentDirectory() + "/_stamps/timestampCurrent.txt";
         string _camoDir = Directory.GetCurrentDirectory() + "/res/camo.jpg";
-        string _iconDir = Directory.GetCurrentDirectory() + "/res/icon.png";
+        string _iconDir = Directory.GetCurrentDirectory() + "/res/icon.ico";
         int counterDuties = 0;
         private void InitUI()
         {
