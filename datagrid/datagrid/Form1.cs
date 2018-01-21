@@ -400,23 +400,19 @@ namespace datagrid
 
             if (_dg == DialogResult.OK)
             {
-                File.Delete(_timeStampCurrent);
-                File.Delete(_timeStampFirst);
-                File.Delete(_database);
+                if (Directory.Exists(Directory.GetCurrentDirectory() + "/_stamps"))
+                    Directory.Delete(Directory.GetCurrentDirectory() + "/_stamps", true);
+
                 _reset = true;
                 MessageBox.Show("" +
                     "Θα γίνει επανεκκίνηση της εφαρμογής για να ολοκληρωθεί\n" +
-                    "η διαδικασία διαγραφής δεδομένον", "Διαγραφή δεδομένων",
+                    "η διαδικασία διαγραφής δεδομένων", "Διαγραφή δεδομένων",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
-
                 Application.Restart();
             }
             else
-            {
                 MessageBox.Show("Η διαδικασία διαγραφής δεδομένων ακυρώθηκε.", "Διαγραφή δεδομένων", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
         }
 
 
