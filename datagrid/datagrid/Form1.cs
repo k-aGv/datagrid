@@ -29,6 +29,7 @@ namespace datagrid
         string _database = Directory.GetCurrentDirectory() + "/_stamps/db.txt";
         string _timeStampFirst = Directory.GetCurrentDirectory() + "/_stamps/timestamp.txt";
         string _timeStampCurrent = Directory.GetCurrentDirectory() + "/_stamps/timestampCurrent.txt";
+        string _camoDir = Directory.GetCurrentDirectory() + "/res/camo.jpg";
         int counterDuties = 0;
         private void InitUI()
         {
@@ -96,8 +97,16 @@ namespace datagrid
             tb_search_name.CharacterCasing = CharacterCasing.Upper;
             tb_add_name.CharacterCasing = CharacterCasing.Upper;
             Text = "3ΛΠ-Ελασσόνα";
+            this.BackgroundImage = Image.FromFile(_camoDir);
+            cb_reset.BackColor = lb_latest.BackColor = lb_start.BackColor = gb_toolbox.BackColor = Color.Transparent;
+            cb_reset.ForeColor = lb_latest.ForeColor = lb_start.ForeColor = 
+            lb_ipiresies.ForeColor = lb_ipiresiesResult.ForeColor = 
+            cb_manualsearch.ForeColor = label1.ForeColor = lb_search.ForeColor = 
+            groupBox3.ForeColor = lb_add.ForeColor = cb_manualAdd.ForeColor =  
+            lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
 
-
+            btn_search.ForeColor = btn_add.ForeColor = btn_addRow.ForeColor = Color.Black;
+            
         }
 
 
