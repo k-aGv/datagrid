@@ -361,24 +361,24 @@
             // 
             this.btn_Reset.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btn_Reset.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_Reset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.btn_Reset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.btn_Reset.ForeColor = System.Drawing.Color.Black;
-            this.btn_Reset.Location = new System.Drawing.Point(940, 12);
+            this.btn_Reset.Location = new System.Drawing.Point(868, 6);
             this.btn_Reset.Name = "btn_Reset";
-            this.btn_Reset.Size = new System.Drawing.Size(89, 33);
+            this.btn_Reset.Size = new System.Drawing.Size(161, 23);
             this.btn_Reset.TabIndex = 7;
-            this.btn_Reset.Text = "Reset";
+            this.btn_Reset.Text = "Επαναφορά";
             this.btn_Reset.UseVisualStyleBackColor = false;
             this.btn_Reset.Click += new System.EventHandler(this.btn_Reset_Click);
             // 
             // cb_reset
             // 
             this.cb_reset.AutoSize = true;
-            this.cb_reset.Location = new System.Drawing.Point(854, 12);
+            this.cb_reset.Location = new System.Drawing.Point(868, 31);
             this.cb_reset.Name = "cb_reset";
-            this.cb_reset.Size = new System.Drawing.Size(84, 17);
+            this.cb_reset.Size = new System.Drawing.Size(164, 17);
             this.cb_reset.TabIndex = 8;
-            this.cb_reset.Text = "Εκκαθάριση";
+            this.cb_reset.Text = "Ενεργοποίηση επαναφοράς";
             this.cb_reset.UseVisualStyleBackColor = true;
             this.cb_reset.CheckedChanged += new System.EventHandler(this.cb_reset_CheckedChanged);
             // 

@@ -85,7 +85,7 @@ namespace datagrid
             cb_reset.Checked = false;
             cb_reset.Location = new Point(btn_Reset.Location.X - cb_reset.Width - viewMargin,
                                         cb_reset.Location.Y);
-
+            btn_Reset.Text = "(Απενεργοποιημένο)";
             btn_Reset.Enabled = false;
             btn_Reset.BackColor = Color.LightGray;
             WindowState = FormWindowState.Normal;
@@ -93,7 +93,7 @@ namespace datagrid
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
             dataGridView1.Height = gb_toolbox.Height - 7; //allign the bottom of DataGridView with the bottom of gb_toolbox
             //btn_Reset.Location.X = dataGridView1.Location.X - btn_Reset.Width;
-            btn_Reset.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_Reset.Location.Y);
+            cb_reset.Location = new Point( btn_Reset.Location.X, btn_Reset.Location.Y + btn_Reset.Height);
             services();
             tb_search_name.CharacterCasing = CharacterCasing.Upper;
             tb_add_name.CharacterCasing = CharacterCasing.Upper;
@@ -107,7 +107,7 @@ namespace datagrid
             lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
             MaximizeBox = false;
             btn_search.ForeColor = btn_add.ForeColor = btn_addRow.ForeColor = Color.Black;
-
+           
             Bitmap b = (Bitmap)Image.FromFile(_iconDir);
             IntPtr pIcon = b.GetHicon();
             Icon z = Icon.FromHandle(pIcon);
@@ -290,7 +290,7 @@ namespace datagrid
             dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
             btn_Reset.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_Reset.Location.Y);
-            cb_reset.Location = new Point((btn_Reset.Location.X - cb_reset.Width - viewMargin), cb_reset.Location.Y);
+            cb_reset.Location = new Point(btn_Reset.Location.X, btn_Reset.Location.Y + btn_Reset.Height);
         }
 
         private void services()
@@ -450,6 +450,7 @@ namespace datagrid
         {
             btn_Reset.Enabled = cb_reset.Checked;
             btn_Reset.BackColor = (btn_Reset.Enabled) ? Color.FromArgb(255, 51, 51) : Color.LightGray;
+            btn_Reset.Text = (btn_Reset.Enabled) ? "ΕΠΑΝΑΦΟΡΑ" : "(Απενεργοποιημένο)";
         }
 
         private void tb_search_name_TextChanged(object sender, EventArgs e)
