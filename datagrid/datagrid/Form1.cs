@@ -33,9 +33,9 @@ namespace datagrid
         private void InitUI()
         {
 
-             dataGridView1.Rows.Insert(0, "");
-             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
-            
+            dataGridView1.Rows.Insert(0, "");
+            dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
+
 
             //MaximizeBox = false;
             string[] days = new string[]
@@ -95,8 +95,9 @@ namespace datagrid
             btn_Reset.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_Reset.Location.Y);
             services();
             tb_search_name.CharacterCasing = CharacterCasing.Upper;
+            tb_add_name.CharacterCasing = CharacterCasing.Upper;
 
-            
+
 
         }
 
@@ -209,12 +210,7 @@ namespace datagrid
 
         }
 
-        private void tb_add_name_TextChanged(object sender, EventArgs e)
-        {
-            foreach (string item in cbb_add_names.Items)
-                if (item.Contains(tb_add_name.Text))
-                    cbb_add_names.SelectedItem = item;
-        }
+
 
         private void btn_addRow_Click(object sender, EventArgs e)
         {
@@ -387,7 +383,7 @@ namespace datagrid
             services_select(_s[0]);
 
         }
-        
+
         private void btn_Reset_Click(object sender, EventArgs e)
         {
             DialogResult _dg = MessageBox.Show(
@@ -432,6 +428,35 @@ namespace datagrid
         {
             btn_Reset.Enabled = cb_reset.Checked;
             btn_Reset.BackColor = (btn_Reset.Enabled) ? Color.FromArgb(255, 51, 51) : Color.LightGray;
+        }
+
+        private void tb_search_name_TextChanged(object sender, EventArgs e)
+        {
+
+            InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
+
+        }
+
+        private void tb_add_name_TextChanged(object sender, EventArgs e)
+        {
+
+            InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
+
+
+            foreach (string item in cbb_add_names.Items)
+                if (item.Contains(tb_add_name.Text))
+                    cbb_add_names.SelectedItem = item;
+
+        }
+
+        private void tb_add_name_Enter(object sender, EventArgs e)
+        {
+            InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
+        }
+
+        private void tb_search_name_Enter(object sender, EventArgs e)
+        {
+            InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
         }
     }
 }

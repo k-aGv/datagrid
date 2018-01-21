@@ -254,6 +254,7 @@
             this.tb_add_name.Size = new System.Drawing.Size(220, 20);
             this.tb_add_name.TabIndex = 5;
             this.tb_add_name.TextChanged += new System.EventHandler(this.tb_add_name_TextChanged);
+            this.tb_add_name.Enter += new System.EventHandler(this.tb_add_name_Enter);
             // 
             // groupBox2
             // 
@@ -325,6 +326,8 @@
             this.tb_search_name.Name = "tb_search_name";
             this.tb_search_name.Size = new System.Drawing.Size(141, 20);
             this.tb_search_name.TabIndex = 5;
+            this.tb_search_name.TextChanged += new System.EventHandler(this.tb_search_name_TextChanged);
+            this.tb_search_name.Enter += new System.EventHandler(this.tb_search_name_Enter);
             // 
             // lb_search
             // 
