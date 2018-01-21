@@ -290,6 +290,7 @@ namespace datagrid
             dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
             btn_Reset.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_Reset.Location.Y);
+            cb_reset.Location = new Point((btn_Reset.Location.X - cb_reset.Width - viewMargin), cb_reset.Location.Y);
         }
 
         private void services()
