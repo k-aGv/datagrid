@@ -32,6 +32,11 @@ namespace datagrid
         int counterDuties = 0;
         private void InitUI()
         {
+
+             dataGridView1.Rows.Insert(0, "");
+             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
+            
+
             //MaximizeBox = false;
             string[] days = new string[]
             { "Δευτέρα", "Τρίτη", "Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο","Κυριακή"};
@@ -89,6 +94,8 @@ namespace datagrid
             //btn_Reset.Location.X = dataGridView1.Location.X - btn_Reset.Width;
             btn_Reset.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_Reset.Location.Y);
             services();
+
+            
 
         }
 
