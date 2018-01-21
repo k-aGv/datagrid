@@ -30,6 +30,7 @@ namespace datagrid
         string _timeStampFirst = Directory.GetCurrentDirectory() + "/_stamps/timestamp.txt";
         string _timeStampCurrent = Directory.GetCurrentDirectory() + "/_stamps/timestampCurrent.txt";
         string _camoDir = Directory.GetCurrentDirectory() + "/res/camo.jpg";
+        string _iconDir = Directory.GetCurrentDirectory() + "/res/icon.png";
         int counterDuties = 0;
         private void InitUI()
         {
@@ -106,7 +107,11 @@ namespace datagrid
             lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
 
             btn_search.ForeColor = btn_add.ForeColor = btn_addRow.ForeColor = Color.Black;
-            
+
+            Bitmap b = (Bitmap)Image.FromFile(_iconDir);
+            IntPtr pIcon = b.GetHicon();
+            Icon z = Icon.FromHandle(pIcon);
+            Icon = z;
         }
 
 
@@ -400,13 +405,13 @@ namespace datagrid
             DialogResult _dg = MessageBox.Show(
                 "Η επιλογή θα διαγράψει όλα τα δεδομένα που έχετε καταχωρήσει.\n" +
                 "Η διαδικασία δεν είναι αναστρέψιμη.\n" +
-                "Επιβεβαιώστε πως θέλετε να συνεχίσετε την διαγραφή.",
+                "Είστε σίγουροι πως θέλετε να συνεχίσετε τη διαγραφή ;",
 
                 "Διαγραφη δεδομένων",
-                MessageBoxButtons.OKCancel,
+                MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
-            if (_dg == DialogResult.OK)
+            if (_dg == DialogResult.Yes)
             {
                 if (Directory.Exists(Directory.GetCurrentDirectory() + "/_stamps"))
                     Directory.Delete(Directory.GetCurrentDirectory() + "/_stamps", true);
