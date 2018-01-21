@@ -105,7 +105,7 @@ namespace datagrid
             cb_manualsearch.ForeColor = label1.ForeColor = lb_search.ForeColor = 
             groupBox3.ForeColor = lb_add.ForeColor = cb_manualAdd.ForeColor =  
             lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
-
+            MaximizeBox = false;
             btn_search.ForeColor = btn_add.ForeColor = btn_addRow.ForeColor = Color.Black;
 
             Bitmap b = (Bitmap)Image.FromFile(_iconDir);
