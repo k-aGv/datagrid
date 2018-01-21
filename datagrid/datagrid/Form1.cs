@@ -95,7 +95,7 @@ namespace datagrid
             services();
             tb_search_name.CharacterCasing = CharacterCasing.Upper;
             tb_add_name.CharacterCasing = CharacterCasing.Upper;
-            Text = "3ΛΠ-Ελασσώνα";
+            Text = "3ΛΠ-Ελασσόνα";
 
 
         }
