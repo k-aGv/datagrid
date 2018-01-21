@@ -76,9 +76,12 @@ namespace datagrid
             cbb_add_names.DropDownStyle = cbb_search_days.DropDownStyle = ComboBoxStyle.DropDownList;
             tb_search_name.Visible = false;
             tb_add_name.Visible = false;
+            cb_reset.Checked = false;
+            cb_reset.Location = new Point(btn_Reset.Location.X - cb_reset.Width - viewMargin,
+                                        cb_reset.Location.Y);
 
-
-            btn_Reset.BackColor = Color.FromArgb(255, 51, 51);
+            btn_Reset.Enabled = false;
+            btn_Reset.BackColor = Color.LightGray;
             WindowState = FormWindowState.Normal;
             dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
@@ -160,6 +163,7 @@ namespace datagrid
         private void Form1_Load(object sender, EventArgs e)
         {
             InitUI();
+            dataGridView1.AllowUserToAddRows = false;
         }
 
         private void btn_add_Click(object sender, EventArgs e)
@@ -416,7 +420,14 @@ namespace datagrid
                 {
                     item.Value = "";
                     item.Selected = false;
+
                 }
+        }
+
+        private void cb_reset_CheckedChanged(object sender, EventArgs e)
+        {
+            btn_Reset.Enabled = cb_reset.Checked;
+            btn_Reset.BackColor = (btn_Reset.Enabled) ? Color.FromArgb(255, 51, 51) : Color.LightGray;
         }
     }
 }

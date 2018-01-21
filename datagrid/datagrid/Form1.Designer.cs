@@ -61,6 +61,7 @@
             this.cbb_search_days = new System.Windows.Forms.ComboBox();
             this.btn_addRow = new System.Windows.Forms.Button();
             this.btn_Reset = new System.Windows.Forms.Button();
+            this.cb_reset = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gb_toolbox.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -366,11 +367,23 @@
             this.btn_Reset.UseVisualStyleBackColor = false;
             this.btn_Reset.Click += new System.EventHandler(this.btn_Reset_Click);
             // 
+            // cb_reset
+            // 
+            this.cb_reset.AutoSize = true;
+            this.cb_reset.Location = new System.Drawing.Point(854, 12);
+            this.cb_reset.Name = "cb_reset";
+            this.cb_reset.Size = new System.Drawing.Size(84, 17);
+            this.cb_reset.TabIndex = 8;
+            this.cb_reset.Text = "Εκκαθάριση";
+            this.cb_reset.UseVisualStyleBackColor = true;
+            this.cb_reset.CheckedChanged += new System.EventHandler(this.cb_reset_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 500);
+            this.Controls.Add(this.cb_reset);
             this.Controls.Add(this.btn_Reset);
             this.Controls.Add(this.btn_addRow);
             this.Controls.Add(this.tb_latest);
@@ -431,6 +444,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button btn_Reset;
+        private System.Windows.Forms.CheckBox cb_reset;
     }
 }
 
