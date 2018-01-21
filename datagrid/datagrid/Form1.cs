@@ -63,7 +63,6 @@ namespace datagrid
 
 
             tb_latest.Enabled = false;
-            tb_start.Enabled = false;
             dataGridView1.ScrollBars = ScrollBars.Both;
             lb_add.Font =
                 new Font
@@ -106,7 +105,7 @@ namespace datagrid
         {
             int column, row;
 
-            StreamWriter _writer, _writerTimestamp;
+            StreamWriter _writer;
             StreamReader _reader, _readerTimestamp;
 
             if (File.Exists(_timeStampCurrent))
@@ -116,20 +115,15 @@ namespace datagrid
                 _reader.Close();
             }
 
-
-            if (!File.Exists(_timeStampFirst))
-            {
-                _writerTimestamp = new StreamWriter(_timeStampFirst);
-                _writerTimestamp.WriteLine("StartTime:" + DateTime.Now);
-                tb_start.Text = DateTime.Now + "";
-                _writerTimestamp.Close();
-            }
-            else
+            //Read the start time if exist and update the textbox
+            if (File.Exists(_timeStampFirst))
             {
                 _readerTimestamp = new StreamReader(_timeStampFirst);
                 tb_start.Text = _readerTimestamp.ReadLine().Remove(0, 10); //10 chars -> StartTime
                 _readerTimestamp.Close();
             }
+
+
             if (!File.Exists(_database))
             {
                 _writer = new StreamWriter(_database);
@@ -229,6 +223,14 @@ namespace datagrid
         {
             if (_reset)
                 return;
+
+
+            if (File.Exists(_timeStampFirst))
+                File.Delete(_timeStampFirst);
+            StreamWriter _writerTimestamp = new StreamWriter(_timeStampFirst);
+            _writerTimestamp.WriteLine("StartTime:" + tb_start.Text);
+            _writerTimestamp.Close();
+
 
             StreamWriter _writer = new StreamWriter(_database);
             _writer.WriteLine("Columns:" + dataGridView1.Columns.Count);
