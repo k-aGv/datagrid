@@ -440,6 +440,11 @@ namespace datagrid
         {
 
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
+            if (tb_search_name.Text.ToCharArray().Any(element => char.IsDigit(element)))
+            {
+                tb_search_name.Text = tb_search_name.Text.Substring(0, tb_search_name.Text.Length - 1);
+                tb_search_name.SelectionStart = tb_search_name.Text.Length;
+            }
 
         }
 
@@ -448,6 +453,11 @@ namespace datagrid
 
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
 
+            if (tb_add_name.Text.ToCharArray().Any(element => char.IsDigit(element)))
+            {
+                tb_add_name.Text = tb_add_name.Text.Substring(0, tb_add_name.Text.Length - 1);
+                tb_add_name.SelectionStart = tb_add_name.Text.Length;
+            }
 
             foreach (string item in cbb_add_names.Items)
                 if (item.Contains(tb_add_name.Text))
