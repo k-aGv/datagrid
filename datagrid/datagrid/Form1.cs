@@ -94,6 +94,7 @@ namespace datagrid
             //btn_Reset.Location.X = dataGridView1.Location.X - btn_Reset.Width;
             btn_Reset.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_Reset.Location.Y);
             services();
+            tb_search_name.CharacterCasing = CharacterCasing.Upper;
 
             
 
