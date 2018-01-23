@@ -51,6 +51,8 @@
             this.cbb_add_names = new System.Windows.Forms.ComboBox();
             this.tb_add_name = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lb_day = new System.Windows.Forms.Label();
+            this.cb_days = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lb_ipiresiesResult = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
@@ -60,8 +62,6 @@
             this.btn_addRow = new System.Windows.Forms.Button();
             this.btn_Reset = new System.Windows.Forms.Button();
             this.cb_reset = new System.Windows.Forms.CheckBox();
-            this.cb_days = new System.Windows.Forms.ComboBox();
-            this.lb_day = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gb_toolbox.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -273,6 +273,31 @@
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             // 
+            // lb_day
+            // 
+            this.lb_day.AutoSize = true;
+            this.lb_day.Location = new System.Drawing.Point(7, 73);
+            this.lb_day.Name = "lb_day";
+            this.lb_day.Size = new System.Drawing.Size(39, 13);
+            this.lb_day.TabIndex = 14;
+            this.lb_day.Text = "Ημέρα";
+            // 
+            // cb_days
+            // 
+            this.cb_days.FormattingEnabled = true;
+            this.cb_days.Items.AddRange(new object[] {
+            "Δευτέρα",
+            "Τρίτη",
+            "Τετάρτη",
+            "Πέμπτη",
+            "Παρασκευή",
+            "Σάββατο",
+            "Κυριακή"});
+            this.cb_days.Location = new System.Drawing.Point(9, 89);
+            this.cb_days.Name = "cb_days";
+            this.cb_days.Size = new System.Drawing.Size(139, 21);
+            this.cb_days.TabIndex = 13;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -361,31 +386,6 @@
             this.cb_reset.Text = "Ενεργοποίηση επαναφοράς";
             this.cb_reset.UseVisualStyleBackColor = true;
             this.cb_reset.CheckedChanged += new System.EventHandler(this.cb_reset_CheckedChanged);
-            // 
-            // cb_days
-            // 
-            this.cb_days.FormattingEnabled = true;
-            this.cb_days.Items.AddRange(new object[] {
-            "Δευτέρα",
-            "Τρίτη",
-            "Τετάρτη",
-            "Πέμπτη",
-            "Παρασκευή",
-            "Σάββατο",
-            "Κυριακή"});
-            this.cb_days.Location = new System.Drawing.Point(9, 89);
-            this.cb_days.Name = "cb_days";
-            this.cb_days.Size = new System.Drawing.Size(139, 21);
-            this.cb_days.TabIndex = 13;
-            // 
-            // lb_day
-            // 
-            this.lb_day.AutoSize = true;
-            this.lb_day.Location = new System.Drawing.Point(9, 70);
-            this.lb_day.Name = "lb_day";
-            this.lb_day.Size = new System.Drawing.Size(39, 13);
-            this.lb_day.TabIndex = 14;
-            this.lb_day.Text = "Ημέρα";
             // 
             // Form1
             // 

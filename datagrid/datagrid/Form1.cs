@@ -333,6 +333,11 @@ namespace datagrid
         }
         private void services_select()
         {
+            if (cbb_search_days.Text == "" || cbb_search_days.Text == null)
+            {
+                MessageBox.Show("Παρακαλώ επιλέξτε όνομα προς αναζήτηση.");
+                return;
+            }
             counterDuties = 0;
             int whichDay = cb_days.SelectedIndex;
             //deftera = 0
@@ -346,11 +351,12 @@ namespace datagrid
                 }
             }
  
-            lb_ipiresiesResult.Text = "" + counterDuties  +" την ημέρα:"+ cb_days.Text;
+            lb_ipiresiesResult.Text = "" + counterDuties  +", την ημέρα : "+ cb_days.Text;
         }
 
         private void services_select(string _s1)
         {
+
             counterDuties = 0;
             foreach (DataGridViewCell item in dataGridView1.SelectedCells)
             {
@@ -420,16 +426,14 @@ namespace datagrid
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
-            int grabbedRow = -1; 
+            
             if (e.KeyCode.ToString() == "Delete")
             {
                 foreach (DataGridViewCell item in dataGridView1.SelectedCells)
                 {
                     item.Value = "";
                     item.Selected = false;
-                    grabbedRow = item.RowIndex;
                 }
-                dataGridView1.Rows.RemoveAt(grabbedRow);
             }
         }
 
