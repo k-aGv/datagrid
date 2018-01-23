@@ -282,12 +282,21 @@ namespace datagrid
             tb_search_name.Visible = cb_manualsearch.Checked;
             tb_search_name.Text = "";
             cbb_search_days.Visible = !cb_manualsearch.Checked;
+            if (cb_manualsearch.Checked) {
+                cbb_search_days.Text = "";
+            }
+            else tb_search_name.Text = "";
         }
 
         private void cb_manualAdd_CheckedChanged(object sender, EventArgs e)
         {
             tb_add_name.Visible = cb_manualAdd.Checked;
             cbb_add_names.Visible = !cb_manualAdd.Checked;
+            if (cb_manualAdd.Checked)
+            {
+                cbb_add_names.Text = "";
+            }
+            else tb_add_name.Text = "";
         }
 
         private void dataGridView1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
@@ -335,9 +344,15 @@ namespace datagrid
         }
         private void services_select()
         {
-            if (cbb_search_days.Text == "" || cbb_search_days.Text == null)
+            if ( (cbb_search_days.Text == "" || cbb_search_days.Text == null) && (tb_search_name.Text == "" || tb_search_name.Text == null))
             {
                 MessageBox.Show("Παρακαλώ επιλέξτε όνομα προς αναζήτηση.");
+                return;
+            }
+
+            if (cb_days.Text == "" || cb_days.Text == null)
+            {
+                MessageBox.Show("Παρακαλώ επιλέξτε ημέρα.");
                 return;
             }
             counterDuties = 0;
@@ -347,12 +362,16 @@ namespace datagrid
             //triti = 1
             int rows = dataGridView1.Rows.Count;
             //MessageBox.Show(rows + "");
+            string s = "";
             for (int i = 0; i < rows; i++)
             {
 
                 try
                 {
-                    if (dataGridView1.Rows[i].Cells[whichDay].Value.ToString() == cbb_search_days.Text)
+                    if (cb_manualsearch.Checked) s = tb_search_name.Text;
+                    else s = cbb_search_days.Text;
+
+                    if (dataGridView1.Rows[i].Cells[whichDay].Value.ToString() == s)
                     {
                         //MessageBox.Show(dataGridView1[whichDay, i].Value.ToString());
                         counterDuties++;

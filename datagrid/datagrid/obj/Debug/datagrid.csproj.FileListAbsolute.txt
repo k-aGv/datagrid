@@ -1,3 +1,12 @@
+C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\bin\Debug\datagrid.exe.config
+C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\bin\Debug\datagrid.exe
+C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\bin\Debug\datagrid.pdb
+C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.Form1.resources
+C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.Properties.Resources.resources
+C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.exe
+C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.pdb
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\bin\Debug\datagrid.exe.config
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\bin\Debug\datagrid.exe
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\bin\Debug\datagrid.pdb
@@ -8,13 +17,4 @@ C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csp
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\obj\Debug\datagrid.exe
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\obj\Debug\datagrid.pdb
 C:\Users\Yannis\Desktop\Github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csprojResolveAssemblyReference.cache
-C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.Form1.resources
-C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csproj.GenerateResource.Cache
-C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csproj.CoreCompileInputs.cache
 C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\datagrid.csprojResolveAssemblyReference.cache
-C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\bin\Debug\Elassona.exe.config
-C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\bin\Debug\Elassona.exe
-C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\bin\Debug\Elassona.pdb
-C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\Elassona.Properties.Resources.resources
-C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\Elassona.exe
-C:\Users\admin\Desktop\github\datagrid\datagrid\datagrid\obj\Debug\Elassona.pdb

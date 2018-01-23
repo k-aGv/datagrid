@@ -85,7 +85,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(287, 54);
             this.dataGridView1.MinimumSize = new System.Drawing.Size(710, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(745, 434);
+            this.dataGridView1.Size = new System.Drawing.Size(745, 470);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnWidthChanged);
@@ -172,9 +172,9 @@
             this.gb_toolbox.Controls.Add(this.groupBox3);
             this.gb_toolbox.Controls.Add(this.groupBox1);
             this.gb_toolbox.Controls.Add(this.groupBox2);
-            this.gb_toolbox.Location = new System.Drawing.Point(13, 48);
+            this.gb_toolbox.Location = new System.Drawing.Point(10, 12);
             this.gb_toolbox.Name = "gb_toolbox";
-            this.gb_toolbox.Size = new System.Drawing.Size(271, 440);
+            this.gb_toolbox.Size = new System.Drawing.Size(271, 512);
             this.gb_toolbox.TabIndex = 4;
             this.gb_toolbox.TabStop = false;
             this.gb_toolbox.Text = "Επιλογές";
@@ -192,7 +192,7 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(8, 20);
+            this.listBox1.Location = new System.Drawing.Point(6, 19);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(145, 147);
             this.listBox1.TabIndex = 0;
@@ -206,7 +206,7 @@
             this.groupBox1.Controls.Add(this.cbb_add_names);
             this.groupBox1.Controls.Add(this.tb_add_name);
             this.groupBox1.Controls.Add(this.lb_add);
-            this.groupBox1.Location = new System.Drawing.Point(7, 15);
+            this.groupBox1.Location = new System.Drawing.Point(6, 15);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(258, 133);
             this.groupBox1.TabIndex = 9;
@@ -261,6 +261,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lb_day);
+            this.groupBox2.Controls.Add(this.cb_days);
             this.groupBox2.Controls.Add(this.cb_manualsearch);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.lb_ipiresiesResult);
@@ -269,17 +271,16 @@
             this.groupBox2.Controls.Add(this.tb_search_name);
             this.groupBox2.Controls.Add(this.lb_search);
             this.groupBox2.Controls.Add(this.cbb_search_days);
-            this.groupBox2.Location = new System.Drawing.Point(6, 321);
+            this.groupBox2.Location = new System.Drawing.Point(6, 332);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(258, 113);
+            this.groupBox2.Size = new System.Drawing.Size(258, 169);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             // 
-
             // lb_day
             // 
             this.lb_day.AutoSize = true;
-            this.lb_day.Location = new System.Drawing.Point(7, 73);
+            this.lb_day.Location = new System.Drawing.Point(6, 106);
             this.lb_day.Name = "lb_day";
             this.lb_day.Size = new System.Drawing.Size(39, 13);
             this.lb_day.TabIndex = 14;
@@ -296,15 +297,15 @@
             "Παρασκευή",
             "Σάββατο",
             "Κυριακή"});
-            this.cb_days.Location = new System.Drawing.Point(9, 89);
+            this.cb_days.Location = new System.Drawing.Point(5, 122);
             this.cb_days.Name = "cb_days";
-            this.cb_days.Size = new System.Drawing.Size(139, 21);
+            this.cb_days.Size = new System.Drawing.Size(148, 21);
             this.cb_days.TabIndex = 13;
-
+            // 
             // cb_manualsearch
             // 
             this.cb_manualsearch.AutoSize = true;
-            this.cb_manualsearch.Location = new System.Drawing.Point(153, 45);
+            this.cb_manualsearch.Location = new System.Drawing.Point(166, 47);
             this.cb_manualsearch.Name = "cb_manualsearch";
             this.cb_manualsearch.Size = new System.Drawing.Size(86, 17);
             this.cb_manualsearch.TabIndex = 12;
@@ -324,7 +325,7 @@
             // lb_ipiresiesResult
             // 
             this.lb_ipiresiesResult.AutoSize = true;
-            this.lb_ipiresiesResult.Location = new System.Drawing.Point(113, 94);
+            this.lb_ipiresiesResult.Location = new System.Drawing.Point(113, 146);
             this.lb_ipiresiesResult.Name = "lb_ipiresiesResult";
             this.lb_ipiresiesResult.Size = new System.Drawing.Size(35, 13);
             this.lb_ipiresiesResult.TabIndex = 7;
@@ -332,7 +333,7 @@
             // 
             // btn_search
             // 
-            this.btn_search.Location = new System.Drawing.Point(154, 68);
+            this.btn_search.Location = new System.Drawing.Point(167, 72);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(85, 23);
             this.btn_search.TabIndex = 8;
@@ -343,7 +344,7 @@
             // lb_ipiresies
             // 
             this.lb_ipiresies.AutoSize = true;
-            this.lb_ipiresies.Location = new System.Drawing.Point(7, 94);
+            this.lb_ipiresies.Location = new System.Drawing.Point(6, 146);
             this.lb_ipiresies.Name = "lb_ipiresies";
             this.lb_ipiresies.Size = new System.Drawing.Size(103, 13);
             this.lb_ipiresies.TabIndex = 6;
@@ -351,9 +352,9 @@
             // 
             // tb_search_name
             // 
-            this.tb_search_name.Location = new System.Drawing.Point(7, 71);
+            this.tb_search_name.Location = new System.Drawing.Point(7, 72);
             this.tb_search_name.Name = "tb_search_name";
-            this.tb_search_name.Size = new System.Drawing.Size(141, 20);
+            this.tb_search_name.Size = new System.Drawing.Size(142, 20);
             this.tb_search_name.TabIndex = 5;
             this.tb_search_name.TextChanged += new System.EventHandler(this.tb_search_name_TextChanged);
             this.tb_search_name.Enter += new System.EventHandler(this.tb_search_name_Enter);
@@ -370,7 +371,7 @@
             // cbb_search_days
             // 
             this.cbb_search_days.FormattingEnabled = true;
-            this.cbb_search_days.Location = new System.Drawing.Point(7, 45);
+            this.cbb_search_days.Location = new System.Drawing.Point(7, 47);
             this.cbb_search_days.Name = "cbb_search_days";
             this.cbb_search_days.Size = new System.Drawing.Size(141, 21);
             this.cbb_search_days.TabIndex = 4;
@@ -414,7 +415,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 500);
+            this.ClientSize = new System.Drawing.Size(1247, 531);
             this.Controls.Add(this.cb_reset);
             this.Controls.Add(this.btn_Reset);
             this.Controls.Add(this.btn_addRow);
@@ -477,6 +478,8 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button btn_Reset;
         private System.Windows.Forms.CheckBox cb_reset;
+        private System.Windows.Forms.Label lb_day;
+        private System.Windows.Forms.ComboBox cb_days;
     }
 }
 
