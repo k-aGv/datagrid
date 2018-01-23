@@ -51,17 +51,17 @@
             this.cbb_add_names = new System.Windows.Forms.ComboBox();
             this.tb_add_name = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cb_manualsearch = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lb_ipiresiesResult = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
             this.lb_ipiresies = new System.Windows.Forms.Label();
-            this.tb_search_name = new System.Windows.Forms.TextBox();
             this.lb_search = new System.Windows.Forms.Label();
             this.cbb_search_days = new System.Windows.Forms.ComboBox();
             this.btn_addRow = new System.Windows.Forms.Button();
             this.btn_Reset = new System.Windows.Forms.Button();
             this.cb_reset = new System.Windows.Forms.CheckBox();
+            this.cb_days = new System.Windows.Forms.ComboBox();
+            this.lb_day = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gb_toolbox.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -182,7 +182,7 @@
             this.groupBox3.Controls.Add(this.listBox1);
             this.groupBox3.Location = new System.Drawing.Point(7, 154);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(160, 172);
+            this.groupBox3.Size = new System.Drawing.Size(160, 145);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Υπηρεσίες";
@@ -192,7 +192,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(8, 20);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(145, 147);
+            this.listBox1.Size = new System.Drawing.Size(145, 121);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -259,30 +259,19 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.cb_manualsearch);
+            this.groupBox2.Controls.Add(this.lb_day);
+            this.groupBox2.Controls.Add(this.cb_days);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.lb_ipiresiesResult);
             this.groupBox2.Controls.Add(this.btn_search);
             this.groupBox2.Controls.Add(this.lb_ipiresies);
-            this.groupBox2.Controls.Add(this.tb_search_name);
             this.groupBox2.Controls.Add(this.lb_search);
             this.groupBox2.Controls.Add(this.cbb_search_days);
-            this.groupBox2.Location = new System.Drawing.Point(6, 321);
+            this.groupBox2.Location = new System.Drawing.Point(6, 301);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(258, 113);
+            this.groupBox2.Size = new System.Drawing.Size(258, 133);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            // 
-            // cb_manualsearch
-            // 
-            this.cb_manualsearch.AutoSize = true;
-            this.cb_manualsearch.Location = new System.Drawing.Point(153, 45);
-            this.cb_manualsearch.Name = "cb_manualsearch";
-            this.cb_manualsearch.Size = new System.Drawing.Size(86, 17);
-            this.cb_manualsearch.TabIndex = 12;
-            this.cb_manualsearch.Text = "Χειροκίνητο";
-            this.cb_manualsearch.UseVisualStyleBackColor = true;
-            this.cb_manualsearch.CheckedChanged += new System.EventHandler(this.cb_manualsearch_CheckedChanged);
             // 
             // label1
             // 
@@ -296,7 +285,7 @@
             // lb_ipiresiesResult
             // 
             this.lb_ipiresiesResult.AutoSize = true;
-            this.lb_ipiresiesResult.Location = new System.Drawing.Point(113, 94);
+            this.lb_ipiresiesResult.Location = new System.Drawing.Point(113, 113);
             this.lb_ipiresiesResult.Name = "lb_ipiresiesResult";
             this.lb_ipiresiesResult.Size = new System.Drawing.Size(35, 13);
             this.lb_ipiresiesResult.TabIndex = 7;
@@ -304,7 +293,7 @@
             // 
             // btn_search
             // 
-            this.btn_search.Location = new System.Drawing.Point(154, 68);
+            this.btn_search.Location = new System.Drawing.Point(167, 60);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(85, 23);
             this.btn_search.TabIndex = 8;
@@ -315,20 +304,11 @@
             // lb_ipiresies
             // 
             this.lb_ipiresies.AutoSize = true;
-            this.lb_ipiresies.Location = new System.Drawing.Point(7, 94);
+            this.lb_ipiresies.Location = new System.Drawing.Point(7, 113);
             this.lb_ipiresies.Name = "lb_ipiresies";
             this.lb_ipiresies.Size = new System.Drawing.Size(103, 13);
             this.lb_ipiresies.TabIndex = 6;
             this.lb_ipiresies.Text = "Πλήθος υπηρεσιών:";
-            // 
-            // tb_search_name
-            // 
-            this.tb_search_name.Location = new System.Drawing.Point(7, 71);
-            this.tb_search_name.Name = "tb_search_name";
-            this.tb_search_name.Size = new System.Drawing.Size(141, 20);
-            this.tb_search_name.TabIndex = 5;
-            this.tb_search_name.TextChanged += new System.EventHandler(this.tb_search_name_TextChanged);
-            this.tb_search_name.Enter += new System.EventHandler(this.tb_search_name_Enter);
             // 
             // lb_search
             // 
@@ -382,6 +362,31 @@
             this.cb_reset.UseVisualStyleBackColor = true;
             this.cb_reset.CheckedChanged += new System.EventHandler(this.cb_reset_CheckedChanged);
             // 
+            // cb_days
+            // 
+            this.cb_days.FormattingEnabled = true;
+            this.cb_days.Items.AddRange(new object[] {
+            "Δευτέρα",
+            "Τρίτη",
+            "Τετάρτη",
+            "Πέμπτη",
+            "Παρασκευή",
+            "Σάββατο",
+            "Κυριακή"});
+            this.cb_days.Location = new System.Drawing.Point(9, 89);
+            this.cb_days.Name = "cb_days";
+            this.cb_days.Size = new System.Drawing.Size(139, 21);
+            this.cb_days.TabIndex = 13;
+            // 
+            // lb_day
+            // 
+            this.lb_day.AutoSize = true;
+            this.lb_day.Location = new System.Drawing.Point(9, 70);
+            this.lb_day.Name = "lb_day";
+            this.lb_day.Size = new System.Drawing.Size(39, 13);
+            this.lb_day.TabIndex = 14;
+            this.lb_day.Text = "Ημέρα";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -424,7 +429,6 @@
         private System.Windows.Forms.GroupBox gb_toolbox;
         private System.Windows.Forms.TextBox tb_add_name;
         private System.Windows.Forms.ComboBox cbb_add_names;
-        private System.Windows.Forms.TextBox tb_search_name;
         private System.Windows.Forms.ComboBox cbb_search_days;
         private System.Windows.Forms.Label lb_search;
         private System.Windows.Forms.Label lb_ipiresies;
@@ -443,12 +447,13 @@
         private System.Windows.Forms.Button btn_addRow;
         private System.Windows.Forms.Label lb_names;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox cb_manualsearch;
         private System.Windows.Forms.CheckBox cb_manualAdd;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button btn_Reset;
         private System.Windows.Forms.CheckBox cb_reset;
+        private System.Windows.Forms.Label lb_day;
+        private System.Windows.Forms.ComboBox cb_days;
     }
 }
 

@@ -87,7 +87,7 @@ namespace datagrid
             dataGridView1.Width = w;
             dataGridView1.Height = h;
             cbb_add_names.DropDownStyle = cbb_search_days.DropDownStyle = ComboBoxStyle.DropDownList;
-            tb_search_name.Visible = false;
+       
             tb_add_name.Visible = false;
             cb_reset.Checked = false;
             cb_reset.Location = new Point(btn_Reset.Location.X - cb_reset.Width - viewMargin,
@@ -102,14 +102,14 @@ namespace datagrid
             //btn_Reset.Location.X = dataGridView1.Location.X - btn_Reset.Width;
             cb_reset.Location = new Point( btn_Reset.Location.X, btn_Reset.Location.Y + btn_Reset.Height);
             services();
-            tb_search_name.CharacterCasing = CharacterCasing.Upper;
+            
             tb_add_name.CharacterCasing = CharacterCasing.Upper;
             Text = "3ΛΠ-Ελασσόνα";
             BackgroundImage = Image.FromFile(_camoDir);
             cb_reset.BackColor = lb_latest.BackColor = lb_start.BackColor = gb_toolbox.BackColor = Color.Transparent;
             cb_reset.ForeColor = lb_latest.ForeColor = lb_start.ForeColor = 
             lb_ipiresies.ForeColor = lb_ipiresiesResult.ForeColor = 
-            cb_manualsearch.ForeColor = label1.ForeColor = lb_search.ForeColor = 
+            label1.ForeColor = lb_search.ForeColor = 
             groupBox3.ForeColor = lb_add.ForeColor = cb_manualAdd.ForeColor =  
             lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
             MaximizeBox = false;
@@ -279,9 +279,7 @@ namespace datagrid
 
         private void cb_manualsearch_CheckedChanged(object sender, EventArgs e)
         {
-            tb_search_name.Visible = cb_manualsearch.Checked;
-            tb_search_name.Text = "";
-            cbb_search_days.Visible = !cb_manualsearch.Checked;
+           
         }
 
         private void cb_manualAdd_CheckedChanged(object sender, EventArgs e)
@@ -336,38 +334,19 @@ namespace datagrid
         private void services_select()
         {
             counterDuties = 0;
-            foreach (DataGridViewCell item in dataGridView1.SelectedCells)
+            int whichDay = cb_days.SelectedIndex;
+            //deftera = 0
+            //triti = 1
+            int rows = dataGridView1.Rows.Count;//=4
+            for (int i = 0; i < rows;i++)
             {
-                item.Selected = false;
-            }
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                if ( dataGridView1[whichDay,i].Value.ToString() == cbb_search_days.Text)
                 {
-                    string _s = "";
-                    try
-                    {
-                        _s = dataGridView1[j, i].Value.ToString();
-                    }
-                    catch { }
-                    if (tb_search_name.Text != "")
-                    {
-
-                        if (_s == tb_search_name.Text)
-                        {
-                            dataGridView1[j, i].Selected = true;
-                            counterDuties++;
-                        }
-                    }
-                    else
-                    {
-                        if (_s == cbb_search_days.Text)
-                        {
-                            dataGridView1[j, i].Selected = true;
-                            counterDuties++;
-                        }
-                    }
+                    counterDuties++;
                 }
-            lb_ipiresiesResult.Text = "" + counterDuties;
+            }
+ 
+            lb_ipiresiesResult.Text = "" + counterDuties  +" την ημέρα:"+ cb_days.Text;
         }
 
         private void services_select(string _s1)
@@ -464,13 +443,7 @@ namespace datagrid
         private void tb_search_name_TextChanged(object sender, EventArgs e)
         {
 
-            InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
-            if (tb_search_name.Text.ToCharArray().Any(element => char.IsDigit(element)))
-            {
-                tb_search_name.Text = tb_search_name.Text.Substring(0, tb_search_name.Text.Length - 1);
-                tb_search_name.SelectionStart = tb_search_name.Text.Length;
-            }
-
+          
         }
 
         private void tb_add_name_TextChanged(object sender, EventArgs e)
