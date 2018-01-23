@@ -185,7 +185,7 @@
             this.groupBox3.Size = new System.Drawing.Size(160, 145);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Υπηρεσίες";
+            this.groupBox3.Text = "Συνολικές Υπηρεσίες";
             // 
             // listBox1
             // 
