@@ -234,7 +234,7 @@ namespace datagrid
             {
                 row.DefaultCellStyle.BackColor = Color.White;
             }
-            dataGridView1.Rows.Insert(0, "");
+            dataGridView1.Rows.Insert(0);
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
 
         }
@@ -342,16 +342,25 @@ namespace datagrid
             int whichDay = cb_days.SelectedIndex;
             //deftera = 0
             //triti = 1
-            int rows = dataGridView1.Rows.Count;//=4
-            for (int i = 0; i < rows;i++)
+            int rows = dataGridView1.Rows.Count;
+            //MessageBox.Show(rows + "");
+            for (int i = 0; i < rows; i++)
             {
-                if ( dataGridView1[whichDay,i].Value.ToString() == cbb_search_days.Text)
+
+                try
                 {
-                    counterDuties++;
+                    if (dataGridView1.Rows[i].Cells[whichDay].Value.ToString() == cbb_search_days.Text)
+                    {
+                        //MessageBox.Show(dataGridView1[whichDay, i].Value.ToString());
+                        counterDuties++;
+                    }
+                } catch (Exception e)
+                {
+                    Console.WriteLine(e + "");
                 }
             }
- 
-            lb_ipiresiesResult.Text = "" + counterDuties  +", την ημέρα : "+ cb_days.Text;
+
+            lb_ipiresiesResult.Text = "" + counterDuties + ", την ημέρα : " + cb_days.Text;
         }
 
         private void services_select(string _s1)
