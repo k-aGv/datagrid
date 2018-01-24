@@ -28,7 +28,12 @@ namespace datagrid
         {
             InitializeComponent();
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "/res/_stamps"))
+            {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/res/_stamps");
+                DirectoryInfo dirinfo = new DirectoryInfo(Directory.GetCurrentDirectory() + "/res/_stamps");
+                dirinfo.Attributes = FileAttributes.Hidden;
+                
+            }
             WindowState = FormWindowState.Maximized;
             _reset = false;
         }
