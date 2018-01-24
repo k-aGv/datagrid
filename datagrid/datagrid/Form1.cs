@@ -21,6 +21,7 @@ namespace datagrid
         string _timeStampCurrent = _disDir + "/res/_stamps/timestampCurrent.txt";
         string _camoDir = _disDir + "/res/camo.jpg";
         string _iconDir = _disDir + "/res/icon.ico";
+        string _notesDB = _disDir + "/res/_stamps/notes.txt";
         int counterDuties = 0;
 
         public Form1()
@@ -181,6 +182,13 @@ namespace datagrid
                 _reader.Close();
             }
 
+            if ( File.Exists (_notesDB))
+            {
+                _reader = new StreamReader(_notesDB);
+                tb_notes.Text = _reader.ReadToEnd();
+                _reader.Close();
+            }
+
         }
 
 
@@ -269,6 +277,48 @@ namespace datagrid
                 _writer.WriteLine(_grid);
             }
             _writer.Close();
+
+            //Manage the unsaved notes
+            if (File.Exists(_notesDB))
+            {
+                string tmpNotes;
+                StreamReader _reader = new StreamReader(_notesDB);
+                tmpNotes = _reader.ReadToEnd();
+                _reader.Close();
+                if (tmpNotes != tb_notes.Text)
+                {
+                    DialogResult _dg = MessageBox.Show(
+                    "Υπάρχουν σημειώσεις που δεν έχουν αποθηκευτεί.\r\nΝα γίνει αποθήκευση;",
+
+                    "Αποθήκευση αλλαγών.",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                    if (_dg == DialogResult.Yes)
+                    {
+                        File.Delete(_notesDB);
+                        StreamWriter _tmpwriter = new StreamWriter(_notesDB);
+                        _tmpwriter.Write(tb_notes.Text);
+                        _tmpwriter.Close();
+                    }
+                }
+            }
+            else
+            {
+                DialogResult _dg = MessageBox.Show(
+                   "Υπάρχουν σημειώσεις που δεν έχουν αποθηκευτεί.\r\nΝα γίνει αποθήκευση;",
+
+                   "Αποθήκευση αλλαγών.",
+                   MessageBoxButtons.YesNo,
+                   MessageBoxIcon.Warning);
+
+                if (_dg == DialogResult.Yes)
+                {
+                    StreamWriter _tmpwriter = new StreamWriter(_notesDB);
+                    _tmpwriter.Write(tb_notes.Text);
+                    _tmpwriter.Close();
+                }
+            }
         }
 
         private void btn_search_Click(object sender, EventArgs e)
@@ -428,7 +478,7 @@ namespace datagrid
         private void btn_Reset_Click(object sender, EventArgs e)
         {
             DialogResult _dg = MessageBox.Show(
-                "Η επιλογή θα διαγράψει όλα τα δεδομένα που έχετε καταχωρήσει.\n" +
+                "Η επιλογή θα διαγράψει όλα τα δεδομένα που έχετε καταχωρήσει,\n" +
                 "Η διαδικασία δεν είναι αναστρέψιμη.\n" +
                 "Είστε σίγουροι πως θέλετε να συνεχίσετε τη διαγραφή ;",
 
@@ -441,6 +491,18 @@ namespace datagrid
                 if (File.Exists(_database)) File.Delete(_database);
                 if (File.Exists(_timeStampCurrent)) File.Delete(_timeStampCurrent);
                 if (File.Exists(_timeStampFirst)) File.Delete(_timeStampFirst);
+
+                //handle note deletation
+                DialogResult dg = MessageBox.Show(
+                    "Να πραγματοποιηθεί διαγραφή σημειώσεων;",
+                    "Διαγραφή σημειώσεων.",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (dg == DialogResult.Yes)
+                    if (File.Exists(_notesDB))
+                        File.Delete(_notesDB);
+                
+                
              
                 _reset = true;
                 MessageBox.Show("" +
