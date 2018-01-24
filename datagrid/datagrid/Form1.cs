@@ -16,12 +16,12 @@ namespace datagrid
         int viewMargin = 10;
         bool _reset;
         static string _disDir = Directory.GetCurrentDirectory();
-        string _database = _disDir + "/res/_stamps/db.txt";
-        string _timeStampFirst = _disDir + "/res/_stamps/timestamp.txt";
-        string _timeStampCurrent = _disDir + "/res/_stamps/timestampCurrent.txt";
+        string _database = _disDir + "/res/_stamps/__TMPDBSTAMP";
+        string _timeStampFirst = _disDir + "/res/_stamps/__TIMESTAMPF";
+        string _timeStampCurrent = _disDir + "/res/_stamps/__TIMESTAMPCUR";
         string _camoDir = _disDir + "/res/camo.jpg";
         string _iconDir = _disDir + "/res/icon.ico";
-        string _notesDB = _disDir + "/res/_stamps/notes.txt";
+        string _notesDB = _disDir + "/res/_stamps/__DBNOTES";
         int counterDuties = 0;
 
         public Form1()
