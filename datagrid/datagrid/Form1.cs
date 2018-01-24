@@ -59,7 +59,7 @@ namespace datagrid
             for (int i = 0; i < 7; i++)
             {
                 dataGridView1.Columns[i].HeaderText = days[i];
-                dataGridView1.Columns[i].Width = 150;
+                dataGridView1.Columns[i].Width = 100;
                 _w += dataGridView1.Columns[i].Width;
             }
 
@@ -81,11 +81,7 @@ namespace datagrid
                );
             lb_ipiresiesResult.Text = "";
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
-            int w = Size.Width - gb_toolbox.Width - gb_toolbox.Location.X - (dataGridView1.Location.X - gb_toolbox.Width) - viewMargin;
-            int h = Size.Height - dataGridView1.Location.Y - viewMargin - 50;
-            //-50 for bars and shit
-            dataGridView1.Width = w;
-            dataGridView1.Height = h;
+           
             cbb_add_names.DropDownStyle = cbb_search_days.DropDownStyle = ComboBoxStyle.DropDownList;
             tb_search_name.Visible = false;
             tb_add_name.Visible = false;
@@ -98,7 +94,7 @@ namespace datagrid
             WindowState = FormWindowState.Normal;
             dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
-            dataGridView1.Height = gb_toolbox.Height - 7; //allign the bottom of DataGridView with the bottom of gb_toolbox
+            dataGridView1.Height = gb_toolbox.Height - btn_add.Height - 7 - viewMargin - gb_notes.Height - viewMargin - cb_showNotes.Height; //allign the bottom of DataGridView with the bottom of gb_toolbox
             //btn_Reset.Location.X = dataGridView1.Location.X - btn_Reset.Width;
             cb_reset.Location = new Point( btn_Reset.Location.X, btn_Reset.Location.Y + btn_Reset.Height);
             services();
@@ -114,7 +110,10 @@ namespace datagrid
             lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
             MaximizeBox = false;
             btn_search.ForeColor = btn_add.ForeColor = btn_addRow.ForeColor = Color.Black;
-           
+            cb_showNotes.Checked = true;
+            cb_showNotes.ForeColor = Color.White;
+            cb_showNotes.BackColor = Color.Transparent;
+
             Bitmap b = (Bitmap)Image.FromFile(_iconDir);
             IntPtr pIcon = b.GetHicon();
             Icon z = Icon.FromHandle(pIcon);
@@ -513,6 +512,21 @@ namespace datagrid
         private void tb_search_name_Enter(object sender, EventArgs e)
         {
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
+        }
+
+        private void cb_showNotes_CheckedChanged(object sender, EventArgs e)
+        {
+            gb_notes.Visible = cb_showNotes.Checked;
+            if (cb_showNotes.Checked)
+            {
+                dataGridView1.Height = gb_toolbox.Height - btn_add.Height - 7 - viewMargin - gb_notes.Height - viewMargin - cb_showNotes.Height; //allign the bottom of DataGridView with the bottom of gb_toolbox
+                cb_showNotes.Location = new Point(cb_showNotes.Location.X, dataGridView1.Location.Y + dataGridView1.Height + 5);
+            }
+            else
+            {
+                dataGridView1.Height = gb_toolbox.Height - btn_add.Height - 7 - viewMargin - cb_showNotes.Height; //allign the bottom of DataGridView with the bottom of gb_toolbox
+                cb_showNotes.Location = new Point(cb_showNotes.Location.X, dataGridView1.Location.Y + dataGridView1.Height);
+            }
         }
     }
 }

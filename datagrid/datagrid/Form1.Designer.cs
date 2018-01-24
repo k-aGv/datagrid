@@ -64,11 +64,15 @@
             this.btn_addRow = new System.Windows.Forms.Button();
             this.btn_Reset = new System.Windows.Forms.Button();
             this.cb_reset = new System.Windows.Forms.CheckBox();
+            this.gb_notes = new System.Windows.Forms.GroupBox();
+            this.tb_notes = new System.Windows.Forms.RichTextBox();
+            this.cb_showNotes = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gb_toolbox.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.gb_notes.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -85,7 +89,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(287, 54);
             this.dataGridView1.MinimumSize = new System.Drawing.Size(710, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(745, 470);
+            this.dataGridView1.Size = new System.Drawing.Size(745, 277);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnWidthChanged);
@@ -411,11 +415,42 @@
             this.cb_reset.UseVisualStyleBackColor = true;
             this.cb_reset.CheckedChanged += new System.EventHandler(this.cb_reset_CheckedChanged);
             // 
+            // gb_notes
+            // 
+            this.gb_notes.Controls.Add(this.tb_notes);
+            this.gb_notes.Location = new System.Drawing.Point(288, 360);
+            this.gb_notes.Name = "gb_notes";
+            this.gb_notes.Size = new System.Drawing.Size(744, 164);
+            this.gb_notes.TabIndex = 9;
+            this.gb_notes.TabStop = false;
+            this.gb_notes.Text = "Σημειώσεις";
+            // 
+            // tb_notes
+            // 
+            this.tb_notes.Location = new System.Drawing.Point(7, 20);
+            this.tb_notes.Name = "tb_notes";
+            this.tb_notes.Size = new System.Drawing.Size(731, 138);
+            this.tb_notes.TabIndex = 0;
+            this.tb_notes.Text = "";
+            // 
+            // cb_showNotes
+            // 
+            this.cb_showNotes.AutoSize = true;
+            this.cb_showNotes.Location = new System.Drawing.Point(288, 337);
+            this.cb_showNotes.Name = "cb_showNotes";
+            this.cb_showNotes.Size = new System.Drawing.Size(141, 17);
+            this.cb_showNotes.TabIndex = 10;
+            this.cb_showNotes.Text = "Εμφάνιση σημειώσεων";
+            this.cb_showNotes.UseVisualStyleBackColor = true;
+            this.cb_showNotes.CheckedChanged += new System.EventHandler(this.cb_showNotes_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 531);
+            this.Controls.Add(this.cb_showNotes);
+            this.Controls.Add(this.gb_notes);
             this.Controls.Add(this.cb_reset);
             this.Controls.Add(this.btn_Reset);
             this.Controls.Add(this.btn_addRow);
@@ -437,6 +472,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.gb_notes.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -480,6 +516,9 @@
         private System.Windows.Forms.CheckBox cb_reset;
         private System.Windows.Forms.Label lb_day;
         private System.Windows.Forms.ComboBox cb_days;
+        private System.Windows.Forms.GroupBox gb_notes;
+        private System.Windows.Forms.RichTextBox tb_notes;
+        private System.Windows.Forms.CheckBox cb_showNotes;
     }
 }
 
