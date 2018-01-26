@@ -319,11 +319,16 @@ namespace datagrid
 
                 if (_dg == DialogResult.Yes)
                 {
-                    StreamWriter _tmpwriter = new StreamWriter(_notesDB);
-                    _tmpwriter.Write(tb_notes.Text);
-                    _tmpwriter.Close();
+                    SaveNotes();
                 }
             }
+        }
+
+        private void SaveNotes()
+        {
+            StreamWriter _tmpwriter = new StreamWriter(_notesDB);
+            _tmpwriter.Write(tb_notes.Text);
+            _tmpwriter.Close();
         }
 
         private void btn_search_Click(object sender, EventArgs e)
@@ -361,7 +366,10 @@ namespace datagrid
             dataGridView1.Width = _w + 2 + dataGridView1.RowHeadersWidth;
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
             btn_Reset.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_Reset.Location.Y);
+            btn_SaveNotes.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_SaveNotes.Location.Y);
             cb_reset.Location = new Point(btn_Reset.Location.X, btn_Reset.Location.Y + btn_Reset.Height);
+            gb_notes.Width = dataGridView1.Width;
+            tb_notes.Width = dataGridView1.Width-15;
         }
 
         private void services()
@@ -584,6 +592,7 @@ namespace datagrid
         private void cb_showNotes_CheckedChanged(object sender, EventArgs e)
         {
             gb_notes.Visible = cb_showNotes.Checked;
+            btn_SaveNotes.Visible = cb_showNotes.Checked;
             if (cb_showNotes.Checked)
             {
                 dataGridView1.Height = gb_toolbox.Height - btn_add.Height - 7 - viewMargin - gb_notes.Height - viewMargin - cb_showNotes.Height; //allign the bottom of DataGridView with the bottom of gb_toolbox
@@ -594,6 +603,17 @@ namespace datagrid
                 dataGridView1.Height = gb_toolbox.Height - btn_add.Height - 7 - viewMargin - cb_showNotes.Height; //allign the bottom of DataGridView with the bottom of gb_toolbox
                 cb_showNotes.Location = new Point(cb_showNotes.Location.X, dataGridView1.Location.Y + dataGridView1.Height);
             }
+        }
+
+        private void btn_SaveNotes_Click(object sender, EventArgs e)
+        {
+            SaveNotes();
+            MessageBox.Show(
+                "Οι σημειώσεις αποθηκεύτηκαν επιτυχώς.", 
+                "Αποθήκευση σημειώσεων",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
         }
     }
 }

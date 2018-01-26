@@ -67,6 +67,7 @@
             this.gb_notes = new System.Windows.Forms.GroupBox();
             this.tb_notes = new System.Windows.Forms.RichTextBox();
             this.cb_showNotes = new System.Windows.Forms.CheckBox();
+            this.btn_SaveNotes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gb_toolbox.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -444,11 +445,22 @@
             this.cb_showNotes.UseVisualStyleBackColor = true;
             this.cb_showNotes.CheckedChanged += new System.EventHandler(this.cb_showNotes_CheckedChanged);
             // 
+            // btn_SaveNotes
+            // 
+            this.btn_SaveNotes.Location = new System.Drawing.Point(868, 337);
+            this.btn_SaveNotes.Name = "btn_SaveNotes";
+            this.btn_SaveNotes.Size = new System.Drawing.Size(164, 23);
+            this.btn_SaveNotes.TabIndex = 11;
+            this.btn_SaveNotes.Text = "Αποθήκευση σημειώσεων";
+            this.btn_SaveNotes.UseVisualStyleBackColor = true;
+            this.btn_SaveNotes.Click += new System.EventHandler(this.btn_SaveNotes_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 531);
+            this.Controls.Add(this.btn_SaveNotes);
             this.Controls.Add(this.cb_showNotes);
             this.Controls.Add(this.gb_notes);
             this.Controls.Add(this.cb_reset);
@@ -519,6 +531,7 @@
         private System.Windows.Forms.GroupBox gb_notes;
         private System.Windows.Forms.RichTextBox tb_notes;
         private System.Windows.Forms.CheckBox cb_showNotes;
+        private System.Windows.Forms.Button btn_SaveNotes;
     }
 }
 
