@@ -22,6 +22,7 @@ namespace datagrid
         string _camoDir = _disDir + "/res/camo.jpg";
         string _iconDir = _disDir + "/res/icon.ico";
         string _notesDB = _disDir + "/res/_stamps/__DBNOTES";
+        string _names = _disDir + "/res/_stamps/__NAMES";
         int counterDuties = 0;
 
         public Form1()
@@ -38,6 +39,39 @@ namespace datagrid
             _reset = false;
         }
       
+        private string GetNames()
+        {
+            string a;
+            if (File.Exists(_names))
+            {
+
+                StreamReader reader = new StreamReader(_names);
+                a = reader.ReadToEnd();
+                reader.Close();
+            }
+            else
+                a = "";
+            return a;
+        }
+        private void InitGBSettingsNameControls()
+        {
+            string _names = GetNames();
+            _names = _names.Replace('[', ' ');
+            _names = _names.Replace(']', ' ');
+            char[] delim = { ',' };
+
+            foreach (string item in _names.Remove(0, 1).Split(delim, StringSplitOptions.RemoveEmptyEntries))
+            {
+                cbb_add_names.Items.Add(item);
+                cbb_search_days.Items.Add(item);
+            }
+        }
+        private void ClearGBSettingsNameControls()
+        {
+            cbb_add_names.Items.Clear();
+            cbb_search_days.Items.Clear();
+            listBox1.Items.Clear();
+        }
         private void InitUI()
         {
 
@@ -48,19 +82,20 @@ namespace datagrid
             //MaximizeBox = false;
             string[] days = new string[]
             { "Δευτέρα", "Τρίτη", "Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο","Κυριακή"};
-            string names = "[ΧΡΙΣΤΟΔΟΥΛΟΣ,ΓΚΙΟΥΡΣΑΝΗΣ,ΠΑΠΑΓΕΩΡΓΙΟΥ,ΛΙΑΚΟΣ,ΠΟΥΡΝΑΡΑΣ,ΑΝΑΤΟΛΙΤΗΣ,ΒΑΛΑΤΣΟΣ,ΚΑΤΣΑΡΑΣ,ΤΣΙΤΣΙΒΑΣ,ΓΚΟΥΨΖΑΡΑΣ]";
-
+            string names = GetNames();
             InitDB(days, names);
-
-            names = names.Replace('[', ' ');
-            names = names.Replace(']', ' ');
-            char[] delim = { ',' };
-            foreach (string item in names.Remove(0, 1).Split(delim, StringSplitOptions.RemoveEmptyEntries))
+            if (names != "")
             {
-                cbb_add_names.Items.Add(item);
-                cbb_search_days.Items.Add(item);
-            }
+                names = names.Replace('[', ' ');
+                names = names.Replace(']', ' ');
+                char[] delim = { ',' };
 
+                foreach (string item in names.Remove(0, 1).Split(delim, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    cbb_add_names.Items.Add(item);
+                    cbb_search_days.Items.Add(item);
+                }
+            }
             int _w = 0;
             for (int i = 0; i < 7; i++)
             {
@@ -87,7 +122,7 @@ namespace datagrid
                );
             lb_ipiresiesResult.Text = "";
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
-           
+
             cbb_add_names.DropDownStyle = cbb_search_days.DropDownStyle = ComboBoxStyle.DropDownList;
             tb_search_name.Visible = false;
             tb_add_name.Visible = false;
@@ -102,20 +137,21 @@ namespace datagrid
             Width = dataGridView1.Location.X + dataGridView1.Width + 30;
             dataGridView1.Height = gb_toolbox.Height - btn_add.Height - 7 - viewMargin - gb_notes.Height - viewMargin - cb_showNotes.Height; //allign the bottom of DataGridView with the bottom of gb_toolbox
             //btn_Reset.Location.X = dataGridView1.Location.X - btn_Reset.Width;
-            cb_reset.Location = new Point( btn_Reset.Location.X, btn_Reset.Location.Y + btn_Reset.Height);
+            cb_reset.Location = new Point(btn_Reset.Location.X, btn_Reset.Location.Y + btn_Reset.Height);
             services();
             tb_search_name.CharacterCasing = CharacterCasing.Upper;
             tb_add_name.CharacterCasing = CharacterCasing.Upper;
             Text = "3ΛΠ-Ελασσόνα";
             BackgroundImage = Image.FromFile(_camoDir);
             cb_reset.BackColor = lb_latest.BackColor = lb_start.BackColor = gb_toolbox.BackColor = Color.Transparent;
-            cb_reset.ForeColor = lb_latest.ForeColor = lb_start.ForeColor = 
-            lb_ipiresies.ForeColor = lb_ipiresiesResult.ForeColor = 
-            cb_manualsearch.ForeColor = label1.ForeColor = lb_search.ForeColor = 
-            groupBox3.ForeColor = lb_add.ForeColor = cb_manualAdd.ForeColor =  
-            lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
+                cb_reset.ForeColor = lb_latest.ForeColor = lb_start.ForeColor =
+                lb_ipiresies.ForeColor = lb_ipiresiesResult.ForeColor =
+                cb_manualsearch.ForeColor = label1.ForeColor = lb_search.ForeColor =
+                groupBox3.ForeColor = lb_add.ForeColor = cb_manualAdd.ForeColor =
+                lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
             MaximizeBox = false;
-            btn_search.ForeColor = btn_add.ForeColor = btn_addRow.ForeColor = Color.Black;
+            btn_search.ForeColor = btn_add.ForeColor = btn_addRow.ForeColor =   
+                btn_editNames.ForeColor = Color.Black;
             cb_showNotes.Checked = true;
             cb_showNotes.ForeColor = Color.White;
             cb_showNotes.BackColor = Color.Transparent;
@@ -420,10 +456,7 @@ namespace datagrid
             counterDuties = 0;
 
             int whichDay = cb_days.SelectedIndex;
-            //deftera = 0
-            //triti = 1
             int rows = dataGridView1.Rows.Count;
-            //MessageBox.Show(rows + "");
             string s = "";
             for (int i = 0; i < rows; i++)
             {
@@ -435,7 +468,6 @@ namespace datagrid
 
                     if (dataGridView1.Rows[i].Cells[whichDay].Value.ToString() == s)
                     {
-                        //MessageBox.Show(dataGridView1[whichDay, i].Value.ToString());
                         counterDuties++;
                     }
                 } catch (Exception e)
@@ -615,5 +647,19 @@ namespace datagrid
                 MessageBoxIcon.Information
                 );
         }
+
+        private void btn_editNames_Click(object sender, EventArgs e)
+        {
+            EditNames _editNames = new EditNames(_names);
+            DialogResult _dg = _editNames.ShowDialog();
+            if (_dg == DialogResult.Yes)
+            {
+                ClearGBSettingsNameControls();
+                InitGBSettingsNameControls();
+                services();
+            }
+        }
+
+       
     }
 }

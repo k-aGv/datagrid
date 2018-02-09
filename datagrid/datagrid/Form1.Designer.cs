@@ -45,6 +45,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_editNames = new System.Windows.Forms.Button();
             this.cb_manualAdd = new System.Windows.Forms.CheckBox();
             this.lb_names = new System.Windows.Forms.Label();
             this.btn_add = new System.Windows.Forms.Button();
@@ -166,7 +167,7 @@
             // lb_add
             // 
             this.lb_add.AutoSize = true;
-            this.lb_add.Location = new System.Drawing.Point(97, 13);
+            this.lb_add.Location = new System.Drawing.Point(6, 8);
             this.lb_add.Name = "lb_add";
             this.lb_add.Size = new System.Drawing.Size(56, 13);
             this.lb_add.TabIndex = 3;
@@ -205,6 +206,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_editNames);
             this.groupBox1.Controls.Add(this.cb_manualAdd);
             this.groupBox1.Controls.Add(this.lb_names);
             this.groupBox1.Controls.Add(this.btn_add);
@@ -217,10 +219,20 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             // 
+            // btn_editNames
+            // 
+            this.btn_editNames.Location = new System.Drawing.Point(166, 48);
+            this.btn_editNames.Name = "btn_editNames";
+            this.btn_editNames.Size = new System.Drawing.Size(86, 47);
+            this.btn_editNames.TabIndex = 14;
+            this.btn_editNames.Text = "Επεξεργασία \r\nονομάτων";
+            this.btn_editNames.UseVisualStyleBackColor = true;
+            this.btn_editNames.Click += new System.EventHandler(this.btn_editNames_Click);
+            // 
             // cb_manualAdd
             // 
             this.cb_manualAdd.AutoSize = true;
-            this.cb_manualAdd.Location = new System.Drawing.Point(140, 29);
+            this.cb_manualAdd.Location = new System.Drawing.Point(75, 9);
             this.cb_manualAdd.Name = "cb_manualAdd";
             this.cb_manualAdd.Size = new System.Drawing.Size(86, 17);
             this.cb_manualAdd.TabIndex = 13;
@@ -231,7 +243,7 @@
             // lb_names
             // 
             this.lb_names.AutoSize = true;
-            this.lb_names.Location = new System.Drawing.Point(6, 29);
+            this.lb_names.Location = new System.Drawing.Point(6, 32);
             this.lb_names.Name = "lb_names";
             this.lb_names.Size = new System.Drawing.Size(90, 13);
             this.lb_names.TabIndex = 10;
@@ -252,14 +264,14 @@
             this.cbb_add_names.FormattingEnabled = true;
             this.cbb_add_names.Location = new System.Drawing.Point(6, 48);
             this.cbb_add_names.Name = "cbb_add_names";
-            this.cbb_add_names.Size = new System.Drawing.Size(220, 21);
+            this.cbb_add_names.Size = new System.Drawing.Size(147, 21);
             this.cbb_add_names.TabIndex = 4;
             // 
             // tb_add_name
             // 
             this.tb_add_name.Location = new System.Drawing.Point(6, 75);
             this.tb_add_name.Name = "tb_add_name";
-            this.tb_add_name.Size = new System.Drawing.Size(220, 20);
+            this.tb_add_name.Size = new System.Drawing.Size(147, 20);
             this.tb_add_name.TabIndex = 5;
             this.tb_add_name.TextChanged += new System.EventHandler(this.tb_add_name_TextChanged);
             this.tb_add_name.Enter += new System.EventHandler(this.tb_add_name_Enter);
@@ -532,6 +544,7 @@
         private System.Windows.Forms.RichTextBox tb_notes;
         private System.Windows.Forms.CheckBox cb_showNotes;
         private System.Windows.Forms.Button btn_SaveNotes;
+        private System.Windows.Forms.Button btn_editNames;
     }
 }
 
