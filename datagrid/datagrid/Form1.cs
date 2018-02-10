@@ -346,16 +346,19 @@ namespace datagrid
             }
             else
             {
-                DialogResult _dg = MessageBox.Show(
-                   "Υπάρχουν σημειώσεις που δεν έχουν αποθηκευτεί.\r\nΝα γίνει αποθήκευση;",
-
-                   "Αποθήκευση αλλαγών.",
-                   MessageBoxButtons.YesNo,
-                   MessageBoxIcon.Warning);
-
-                if (_dg == DialogResult.Yes)
+                if (tb_notes.Text != "")
                 {
-                    SaveNotes();
+                    DialogResult _dg = MessageBox.Show(
+                       "Υπάρχουν σημειώσεις που δεν έχουν αποθηκευτεί.\r\nΝα γίνει αποθήκευση;",
+
+                       "Αποθήκευση αλλαγών.",
+                       MessageBoxButtons.YesNo,
+                       MessageBoxIcon.Warning);
+
+                    if (_dg == DialogResult.Yes)
+                    {
+                        SaveNotes();
+                    }
                 }
             }
         }
