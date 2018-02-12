@@ -667,10 +667,29 @@ namespace datagrid
 
         private void btn_removeRow_Click(object sender, EventArgs e)
         {
-            for(int i=dataGridView1.SelectedRows.Count-1; i>=0; i--)
+            DialogResult _dg = MessageBox.Show("Αφαίρεση των επιλεγμένων σειρών?",
+                "Προσοχή!",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (_dg == DialogResult.Yes)
             {
-                dataGridView1.Rows.Remove(dataGridView1.SelectedRows[i]);
+                _dg = MessageBox.Show("Επιβεβαίωση της επιλογής αφαίρεσης?\nΗ διαδικασία δεν μπορεί να αντιστραφεί!",
+                "Προσοχή!",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+                if (_dg == DialogResult.Yes)
+                {
+                    for (int i = dataGridView1.SelectedRows.Count - 1; i >= 0; i--)
+                    {
+                        dataGridView1.Rows.Remove(dataGridView1.SelectedRows[i]);
+                    }
+                }
+                else
+                    return;
             }
+            else
+                return;
         }
 
         private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
