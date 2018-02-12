@@ -69,6 +69,7 @@
             this.tb_notes = new System.Windows.Forms.RichTextBox();
             this.cb_showNotes = new System.Windows.Forms.CheckBox();
             this.btn_SaveNotes = new System.Windows.Forms.Button();
+            this.btn_removeRow = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gb_toolbox.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -95,6 +96,7 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnWidthChanged);
+            this.dataGridView1.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridView1_RowStateChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
             // Column1
@@ -135,7 +137,7 @@
             // lb_start
             // 
             this.lb_start.AutoSize = true;
-            this.lb_start.Location = new System.Drawing.Point(421, 11);
+            this.lb_start.Location = new System.Drawing.Point(428, 13);
             this.lb_start.Name = "lb_start";
             this.lb_start.Size = new System.Drawing.Size(88, 13);
             this.lb_start.TabIndex = 1;
@@ -144,7 +146,7 @@
             // lb_latest
             // 
             this.lb_latest.AutoSize = true;
-            this.lb_latest.Location = new System.Drawing.Point(567, 11);
+            this.lb_latest.Location = new System.Drawing.Point(574, 13);
             this.lb_latest.Name = "lb_latest";
             this.lb_latest.Size = new System.Drawing.Size(107, 13);
             this.lb_latest.TabIndex = 1;
@@ -152,14 +154,14 @@
             // 
             // tb_start
             // 
-            this.tb_start.Location = new System.Drawing.Point(424, 26);
+            this.tb_start.Location = new System.Drawing.Point(431, 28);
             this.tb_start.Name = "tb_start";
             this.tb_start.Size = new System.Drawing.Size(134, 20);
             this.tb_start.TabIndex = 2;
             // 
             // tb_latest
             // 
-            this.tb_latest.Location = new System.Drawing.Point(570, 26);
+            this.tb_latest.Location = new System.Drawing.Point(577, 28);
             this.tb_latest.Name = "tb_latest";
             this.tb_latest.Size = new System.Drawing.Size(134, 20);
             this.tb_latest.TabIndex = 2;
@@ -395,9 +397,10 @@
             // 
             // btn_addRow
             // 
+            this.btn_addRow.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_addRow.Location = new System.Drawing.Point(287, 12);
             this.btn_addRow.Name = "btn_addRow";
-            this.btn_addRow.Size = new System.Drawing.Size(131, 35);
+            this.btn_addRow.Size = new System.Drawing.Size(66, 35);
             this.btn_addRow.TabIndex = 6;
             this.btn_addRow.Text = "Προσθήκη σειράς";
             this.btn_addRow.UseVisualStyleBackColor = true;
@@ -467,11 +470,23 @@
             this.btn_SaveNotes.UseVisualStyleBackColor = true;
             this.btn_SaveNotes.Click += new System.EventHandler(this.btn_SaveNotes_Click);
             // 
+            // btn_removeRow
+            // 
+            this.btn_removeRow.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_removeRow.Location = new System.Drawing.Point(359, 12);
+            this.btn_removeRow.Name = "btn_removeRow";
+            this.btn_removeRow.Size = new System.Drawing.Size(66, 35);
+            this.btn_removeRow.TabIndex = 12;
+            this.btn_removeRow.Text = "Αφαίρεση σειράς";
+            this.btn_removeRow.UseVisualStyleBackColor = true;
+            this.btn_removeRow.Click += new System.EventHandler(this.btn_removeRow_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 531);
+            this.Controls.Add(this.btn_removeRow);
             this.Controls.Add(this.btn_SaveNotes);
             this.Controls.Add(this.cb_showNotes);
             this.Controls.Add(this.gb_notes);
@@ -545,6 +560,7 @@
         private System.Windows.Forms.CheckBox cb_showNotes;
         private System.Windows.Forms.Button btn_SaveNotes;
         private System.Windows.Forms.Button btn_editNames;
+        private System.Windows.Forms.Button btn_removeRow;
     }
 }
 

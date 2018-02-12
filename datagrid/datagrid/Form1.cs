@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace datagrid
 {
@@ -143,6 +144,7 @@ namespace datagrid
             tb_add_name.CharacterCasing = CharacterCasing.Upper;
             Text = "3ΛΠ-Ελασσόνα";
             BackgroundImage = Image.FromFile(_camoDir);
+            btn_addRow.BackColor = Color.FromArgb(52, 173, 8);
             cb_reset.BackColor = lb_latest.BackColor = lb_start.BackColor = gb_toolbox.BackColor = Color.Transparent;
                 cb_reset.ForeColor = lb_latest.ForeColor = lb_start.ForeColor =
                 lb_ipiresies.ForeColor = lb_ipiresiesResult.ForeColor =
@@ -663,6 +665,26 @@ namespace datagrid
             }
         }
 
-       
+        private void btn_removeRow_Click(object sender, EventArgs e)
+        {
+            for(int i=dataGridView1.SelectedRows.Count-1; i>=0; i--)
+            {
+                dataGridView1.Rows.Remove(dataGridView1.SelectedRows[i]);
+            }
+        }
+
+        private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                btn_removeRow.Enabled = false;
+                btn_removeRow.BackColor = Color.FromKnownColor(KnownColor.Control);
+            }
+            else
+            {
+                btn_removeRow.Enabled = true;
+                btn_removeRow.BackColor = Color.FromArgb(209, 11, 11);
+            }
+        }
     }
 }
