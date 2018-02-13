@@ -10,10 +10,18 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 
-namespace datagrid
-{
-    public partial class Form1 : Form
-    {
+/*
+ * Fixed incorrect space after the last item of the list
+ * 
+ * Names removed from the list, are automatically removed from datagridview
+ * 
+ * Changed ReadOnly property to True (user can't type directly inside cells) 
+ * 
+ * 
+ * 
+ * */
+namespace datagrid {
+    public partial class Form1 : Form {
         int viewMargin = 10;
         bool _reset;
         static string _disDir = Directory.GetCurrentDirectory();
@@ -24,74 +32,86 @@ namespace datagrid
         string _iconDir = _disDir + "/res/icon.ico";
         string _notesDB = _disDir + "/res/_stamps/__DBNOTES";
         string _names = _disDir + "/res/_stamps/__NAMES";
+
+        string[] days = new string[]
+            { "Δευτέρα", "Τρίτη", "Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο","Κυριακή"};
         int counterDuties = 0;
 
-        public Form1()
-        {
+        public Form1() {
             InitializeComponent();
+            CreateHiddenDir();
+            WindowState = FormWindowState.Maximized;
+            _reset = false;
+        }
+        private void CreateHiddenDir() {
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "/res/_stamps"))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/res/_stamps");
                 DirectoryInfo dirinfo = new DirectoryInfo(Directory.GetCurrentDirectory() + "/res/_stamps");
                 dirinfo.Attributes = FileAttributes.Hidden;
-                
             }
-            WindowState = FormWindowState.Maximized;
-            _reset = false;
         }
-      
-        private string GetNames()
-        {
+        private string GetNames() {
             string a;
             if (File.Exists(_names))
             {
-
                 StreamReader reader = new StreamReader(_names);
                 a = reader.ReadToEnd();
+                a = a.Trim('[', ']', ' ');
                 reader.Close();
             }
             else
                 a = "";
             return a;
         }
-        private void InitGBSettingsNameControls()
-        {
+        private void InitGBSettingsNameControls() {
             string _names = GetNames();
-            _names = _names.Replace('[', ' ');
-            _names = _names.Replace(']', ' ');
-            char[] delim = { ',' };
-
-            foreach (string item in _names.Remove(0, 1).Split(delim, StringSplitOptions.RemoveEmptyEntries))
+            if (_names == "")
+                return;
+            else
             {
-                cbb_add_names.Items.Add(item);
-                cbb_search_days.Items.Add(item);
+                char[] delim = { ',' };
+                foreach (string item in _names.Split(delim, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    cbb_add_names.Items.Add(item);
+                    cbb_search_days.Items.Add(item);
+                }
             }
         }
-        private void ClearGBSettingsNameControls()
-        {
+        private void ClearGBSettingsNameControls() {
             cbb_add_names.Items.Clear();
             cbb_search_days.Items.Clear();
             listBox1.Items.Clear();
         }
-        private void InitUI()
-        {
+        private void ClearDataGridView() {
+            dataGridView1.SelectAll();
+
+            foreach (object _o in dataGridView1.SelectedCells)
+                for (int i = 0; i < listBox1.Items.Count; i++)
+                    if (((DataGridViewCell)_o).Value.ToString() == listBox1.Items[i].ToString().Split(':')[0].ToString())
+                        ((DataGridViewCell)_o).Selected = false;
+
+            foreach (object _o in dataGridView1.SelectedCells)
+            {
+                ((DataGridViewCell)_o).Value = "";
+                ((DataGridViewCell)_o).Selected = false;
+            }
+        }
+
+        private void InitUI() {
 
             dataGridView1.Rows.Insert(0, "");
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
 
 
             //MaximizeBox = false;
-            string[] days = new string[]
-            { "Δευτέρα", "Τρίτη", "Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο","Κυριακή"};
+
             string names = GetNames();
-            InitDB(days, names);
             if (names != "")
             {
-                names = names.Replace('[', ' ');
-                names = names.Replace(']', ' ');
+                InitDB(days, names);
                 char[] delim = { ',' };
-
-                foreach (string item in names.Remove(0, 1).Split(delim, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string item in names.Split(delim, StringSplitOptions.RemoveEmptyEntries))
                 {
                     cbb_add_names.Items.Add(item);
                     cbb_search_days.Items.Add(item);
@@ -146,13 +166,13 @@ namespace datagrid
             BackgroundImage = Image.FromFile(_camoDir);
             btn_addRow.BackColor = Color.FromArgb(52, 173, 8);
             cb_reset.BackColor = lb_latest.BackColor = lb_start.BackColor = gb_toolbox.BackColor = Color.Transparent;
-                cb_reset.ForeColor = lb_latest.ForeColor = lb_start.ForeColor =
-                lb_ipiresies.ForeColor = lb_ipiresiesResult.ForeColor =
-                cb_manualsearch.ForeColor = label1.ForeColor = lb_search.ForeColor =
-                groupBox3.ForeColor = lb_add.ForeColor = cb_manualAdd.ForeColor =
-                lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
+            cb_reset.ForeColor = lb_latest.ForeColor = lb_start.ForeColor =
+            lb_ipiresies.ForeColor = lb_ipiresiesResult.ForeColor =
+            cb_manualsearch.ForeColor = label1.ForeColor = lb_search.ForeColor =
+            groupBox3.ForeColor = lb_add.ForeColor = cb_manualAdd.ForeColor =
+            lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
             MaximizeBox = false;
-            btn_search.ForeColor = btn_add.ForeColor = btn_addRow.ForeColor =   
+            btn_search.ForeColor = btn_add.ForeColor = btn_addRow.ForeColor =
                 btn_editNames.ForeColor = Color.Black;
             cb_showNotes.Checked = true;
             cb_showNotes.ForeColor = Color.White;
@@ -166,8 +186,7 @@ namespace datagrid
         }
 
 
-        private void InitDB(string[] _days, string _names)
-        {
+        private void InitDB(string[] _days, string _names) {
             int column, row;
 
             StreamWriter _writer;
@@ -225,7 +244,7 @@ namespace datagrid
                 _reader.Close();
             }
 
-            if ( File.Exists (_notesDB))
+            if (File.Exists(_notesDB))
             {
                 _reader = new StreamReader(_notesDB);
                 tb_notes.Text = _reader.ReadToEnd();
@@ -235,14 +254,23 @@ namespace datagrid
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            InitUI();
+        private void Form1_Load(object sender, EventArgs e) {
+            try
+            {
+                InitUI();
+            }
+            catch
+            {
+                if (File.Exists(_disDir + "/res/_stamps"))
+                {
+                    File.Delete(_disDir + "/res/_stamps");
+                    CreateHiddenDir();
+                }
+            }
             dataGridView1.AllowUserToAddRows = false;
         }
 
-        private void btn_add_Click(object sender, EventArgs e)
-        {
+        private void btn_add_Click(object sender, EventArgs e) {
             if (!cb_manualAdd.Checked)
             {
                 if (cbb_add_names.SelectedIndex == -1)
@@ -278,8 +306,7 @@ namespace datagrid
 
 
 
-        private void btn_addRow_Click(object sender, EventArgs e)
-        {
+        private void btn_addRow_Click(object sender, EventArgs e) {
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 row.DefaultCellStyle.BackColor = Color.White;
@@ -291,8 +318,7 @@ namespace datagrid
 
 
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             if (_reset)
                 return;
 
@@ -365,31 +391,28 @@ namespace datagrid
             }
         }
 
-        private void SaveNotes()
-        {
+        private void SaveNotes() {
             StreamWriter _tmpwriter = new StreamWriter(_notesDB);
             _tmpwriter.Write(tb_notes.Text);
             _tmpwriter.Close();
         }
 
-        private void btn_search_Click(object sender, EventArgs e)
-        {
+        private void btn_search_Click(object sender, EventArgs e) {
             services_select();
         }
 
-        private void cb_manualsearch_CheckedChanged(object sender, EventArgs e)
-        {
+        private void cb_manualsearch_CheckedChanged(object sender, EventArgs e) {
             tb_search_name.Visible = cb_manualsearch.Checked;
             tb_search_name.Text = "";
             cbb_search_days.Visible = !cb_manualsearch.Checked;
-            if (cb_manualsearch.Checked) {
+            if (cb_manualsearch.Checked)
+            {
                 cbb_search_days.Text = "";
             }
             else tb_search_name.Text = "";
         }
 
-        private void cb_manualAdd_CheckedChanged(object sender, EventArgs e)
-        {
+        private void cb_manualAdd_CheckedChanged(object sender, EventArgs e) {
             tb_add_name.Visible = cb_manualAdd.Checked;
             cbb_add_names.Visible = !cb_manualAdd.Checked;
             if (cb_manualAdd.Checked)
@@ -399,8 +422,7 @@ namespace datagrid
             else tb_add_name.Text = "";
         }
 
-        private void dataGridView1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
-        {
+        private void dataGridView1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e) {
             int _w = 0;
             foreach (DataGridViewColumn item in dataGridView1.Columns)
                 _w += item.Width;
@@ -410,11 +432,10 @@ namespace datagrid
             btn_SaveNotes.Location = new Point((dataGridView1.Location.X + dataGridView1.Width) - btn_Reset.Width, btn_SaveNotes.Location.Y);
             cb_reset.Location = new Point(btn_Reset.Location.X, btn_Reset.Location.Y + btn_Reset.Height);
             gb_notes.Width = dataGridView1.Width;
-            tb_notes.Width = dataGridView1.Width-15;
+            tb_notes.Width = dataGridView1.Width - 15;
         }
 
-        private void services()
-        {
+        private void services() {
             int[] _soldiers = new int[cbb_add_names.Items.Count];
             string[,] _values = new string[dataGridView1.Columns.Count, dataGridView1.Rows.Count];
             listBox1.Items.Clear();
@@ -445,9 +466,8 @@ namespace datagrid
                 listBox1.Items.Add(_o);
             }
         }
-        private void services_select()
-        {
-            if ( (cbb_search_days.Text == "" || cbb_search_days.Text == null) && (tb_search_name.Text == "" || tb_search_name.Text == null))
+        private void services_select() {
+            if ((cbb_search_days.Text == "" || cbb_search_days.Text == null) && (tb_search_name.Text == "" || tb_search_name.Text == null))
             {
                 MessageBox.Show("Παρακαλώ επιλέξτε όνομα προς αναζήτηση.");
                 return;
@@ -475,7 +495,8 @@ namespace datagrid
                     {
                         counterDuties++;
                     }
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine(e + "");
                 }
@@ -485,8 +506,7 @@ namespace datagrid
 
         }
 
-        private void services_select(string _s1)
-        {
+        private void services_select(string _s1) {
 
             counterDuties = 0;
             foreach (DataGridViewCell item in dataGridView1.SelectedCells)
@@ -512,21 +532,18 @@ namespace datagrid
             lb_ipiresiesResult.Text = "" + counterDuties;
         }
 
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
             services();
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
             string[] _s = listBox1.SelectedItem.ToString().Split(':');
             services_select(_s[0]);
 
         }
 
-        private void btn_Reset_Click(object sender, EventArgs e)
-        {
+        private void btn_Reset_Click(object sender, EventArgs e) {
             DialogResult _dg = MessageBox.Show(
                 "Η επιλογή θα διαγράψει όλα τα δεδομένα που έχετε καταχωρήσει,\n" +
                 "Η διαδικασία δεν είναι αναστρέψιμη.\n" +
@@ -551,9 +568,9 @@ namespace datagrid
                 if (dg == DialogResult.Yes)
                     if (File.Exists(_notesDB))
                         File.Delete(_notesDB);
-                
-                
-             
+
+
+
                 _reset = true;
                 MessageBox.Show("" +
                     "Θα γίνει επανεκκίνηση της εφαρμογής για να ολοκληρωθεί\n" +
@@ -567,9 +584,8 @@ namespace datagrid
         }
 
 
-        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
-        {
-            
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e) {
+
             if (e.KeyCode.ToString() == "Delete")
             {
                 foreach (DataGridViewCell item in dataGridView1.SelectedCells)
@@ -580,15 +596,13 @@ namespace datagrid
             }
         }
 
-        private void cb_reset_CheckedChanged(object sender, EventArgs e)
-        {
+        private void cb_reset_CheckedChanged(object sender, EventArgs e) {
             btn_Reset.Enabled = cb_reset.Checked;
             btn_Reset.BackColor = (btn_Reset.Enabled) ? Color.FromArgb(255, 51, 51) : Color.LightGray;
             btn_Reset.Text = (btn_Reset.Enabled) ? "ΕΠΑΝΑΦΟΡΑ" : "(Απενεργοποιημένο)";
         }
 
-        private void tb_search_name_TextChanged(object sender, EventArgs e)
-        {
+        private void tb_search_name_TextChanged(object sender, EventArgs e) {
 
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
             if (tb_search_name.Text.ToCharArray().Any(element => char.IsDigit(element)))
@@ -599,8 +613,7 @@ namespace datagrid
 
         }
 
-        private void tb_add_name_TextChanged(object sender, EventArgs e)
-        {
+        private void tb_add_name_TextChanged(object sender, EventArgs e) {
 
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
 
@@ -616,18 +629,15 @@ namespace datagrid
 
         }
 
-        private void tb_add_name_Enter(object sender, EventArgs e)
-        {
+        private void tb_add_name_Enter(object sender, EventArgs e) {
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
         }
 
-        private void tb_search_name_Enter(object sender, EventArgs e)
-        {
+        private void tb_search_name_Enter(object sender, EventArgs e) {
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("el-GR"));
         }
 
-        private void cb_showNotes_CheckedChanged(object sender, EventArgs e)
-        {
+        private void cb_showNotes_CheckedChanged(object sender, EventArgs e) {
             gb_notes.Visible = cb_showNotes.Checked;
             btn_SaveNotes.Visible = cb_showNotes.Checked;
             if (cb_showNotes.Checked)
@@ -642,31 +652,30 @@ namespace datagrid
             }
         }
 
-        private void btn_SaveNotes_Click(object sender, EventArgs e)
-        {
+        private void btn_SaveNotes_Click(object sender, EventArgs e) {
             SaveNotes();
             MessageBox.Show(
-                "Οι σημειώσεις αποθηκεύτηκαν επιτυχώς.", 
+                "Οι σημειώσεις αποθηκεύτηκαν επιτυχώς.",
                 "Αποθήκευση σημειώσεων",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
                 );
         }
 
-        private void btn_editNames_Click(object sender, EventArgs e)
-        {
+        private void btn_editNames_Click(object sender, EventArgs e) {
             EditNames _editNames = new EditNames(_names);
             DialogResult _dg = _editNames.ShowDialog();
             if (_dg == DialogResult.Yes)
             {
                 ClearGBSettingsNameControls();
                 InitGBSettingsNameControls();
+                
                 services();
+                ClearDataGridView();
             }
         }
 
-        private void btn_removeRow_Click(object sender, EventArgs e)
-        {
+        private void btn_removeRow_Click(object sender, EventArgs e) {
             DialogResult _dg = MessageBox.Show("Αφαίρεση των επιλεγμένων σειρών?",
                 "Προσοχή!",
                 MessageBoxButtons.YesNo,
@@ -692,8 +701,7 @@ namespace datagrid
                 return;
         }
 
-        private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-        {
+        private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e) {
             if (dataGridView1.SelectedRows.Count == 0)
             {
                 btn_removeRow.Enabled = false;

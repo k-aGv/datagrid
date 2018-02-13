@@ -8,17 +8,15 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-namespace datagrid
-{
-    public partial class EditNames : Form
-    {
+namespace datagrid {
+
+    public partial class EditNames : Form {
+
         //<Constructors>
-        public EditNames()
-        {
+        public EditNames() {
             InitializeComponent();
         }
-        public EditNames(string _names)
-        {
+        public EditNames(string _names) {
             InitializeComponent();
             NamesPath = _names;
         }
@@ -29,8 +27,7 @@ namespace datagrid
 
         string _iconDir = Directory.GetCurrentDirectory() + "/res/icon.ico";
 
-        private void EditNames_Load(object sender, EventArgs e)
-        {
+        private void EditNames_Load(object sender, EventArgs e) {
             /*
             needless for FormBorderStyle = FixedToolWindow
              * 
@@ -44,20 +41,17 @@ namespace datagrid
             pb_Delete.BackColor = Color.Transparent;
             InitListBox();
         }
-        
 
-        private void pb_Insert_Click(object sender, EventArgs e)
-        {
+
+        private void pb_Insert_Click(object sender, EventArgs e) {
             if (!listBox1.Items.Contains(tb_Insert.Text))
                 listBox1.Items.Add(tb_Insert.Text);
         }
-        private void pb_Save_Click(object sender, EventArgs e)
-        {
+        private void pb_Save_Click(object sender, EventArgs e) {
             UserConfirm();
         }
 
-        private string GetNames()
-        {
+        private string GetNames() {
             string a = "";
             if (!File.Exists(NamesPath))
                 return a;
@@ -69,8 +63,7 @@ namespace datagrid
                 return a;
             }
         }
-        private void SaveNames()
-        {
+        private void SaveNames() {
             string _names = "[";
             foreach (object item in listBox1.Items)
             {
@@ -82,22 +75,19 @@ namespace datagrid
             writer.Write(_names);
             writer.Close();
         }
-        private void InitListBox()
-        {
+        private void InitListBox() {
             string _names = GetNames();
             if (_names == "")
                 return;
             else
             {
-                _names = _names.Replace('[', ' ');
-                _names = _names.Replace(']', ' ');
+                _names = _names.Trim(' ', '[', ']');
                 char[] delim = { ',' };
-                foreach (string item in _names.Remove(0, 1).Split(delim, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string item in _names.Split(delim, StringSplitOptions.RemoveEmptyEntries))
                     listBox1.Items.Add(item);
             }
         }
-        private void UserConfirm()
-        {
+        private void UserConfirm() {
             DialogResult = MessageBox.Show("" +
                    "You are about to save your changes in the Names List.\n" +
                    "Do you want to proceed?",
@@ -116,15 +106,13 @@ namespace datagrid
                     MessageBoxIcon.Information);
             }
         }
-        
-        private void pb_Delete_Click(object sender, EventArgs e)
-        {
+
+        private void pb_Delete_Click(object sender, EventArgs e) {
             for (int i = listBox1.SelectedIndices.Count - 1; i >= 0; i--)
                 listBox1.Items.RemoveAt(listBox1.SelectedIndices[i]);
         }
-        
-        private void tb_Insert_KeyDown(object sender, KeyEventArgs e)
-        {
+
+        private void tb_Insert_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode.ToString() == "Return")
             {
                 pb_Insert_Click(sender, e);
