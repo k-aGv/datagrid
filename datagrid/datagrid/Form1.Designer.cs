@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,16 +67,31 @@
             this.btn_Reset = new System.Windows.Forms.Button();
             this.cb_reset = new System.Windows.Forms.CheckBox();
             this.gb_notes = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.pb_decrease = new System.Windows.Forms.PictureBox();
+            this.pb_increase = new System.Windows.Forms.PictureBox();
+            this.pb_underline = new System.Windows.Forms.PictureBox();
+            this.pb_italic = new System.Windows.Forms.PictureBox();
+            this.pb_bold = new System.Windows.Forms.PictureBox();
             this.tb_notes = new System.Windows.Forms.RichTextBox();
             this.cb_showNotes = new System.Windows.Forms.CheckBox();
             this.btn_SaveNotes = new System.Windows.Forms.Button();
             this.btn_removeRow = new System.Windows.Forms.Button();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gb_toolbox.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gb_notes.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_decrease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_increase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_underline)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_italic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_bold)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -441,19 +457,98 @@
             // 
             // gb_notes
             // 
+            this.gb_notes.Controls.Add(this.label2);
+            this.gb_notes.Controls.Add(this.groupBox4);
             this.gb_notes.Controls.Add(this.tb_notes);
             this.gb_notes.Location = new System.Drawing.Point(288, 360);
             this.gb_notes.Name = "gb_notes";
             this.gb_notes.Size = new System.Drawing.Size(744, 164);
             this.gb_notes.TabIndex = 9;
             this.gb_notes.TabStop = false;
-            this.gb_notes.Text = "Σημειώσεις";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Σημειώσεις";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button1);
+            this.groupBox4.Controls.Add(this.pb_decrease);
+            this.groupBox4.Controls.Add(this.pb_increase);
+            this.groupBox4.Controls.Add(this.pb_underline);
+            this.groupBox4.Controls.Add(this.pb_italic);
+            this.groupBox4.Controls.Add(this.pb_bold);
+            this.groupBox4.Location = new System.Drawing.Point(7, 7);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(391, 33);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            // 
+            // pb_decrease
+            // 
+            this.pb_decrease.Image = ((System.Drawing.Image)(resources.GetObject("pb_decrease.Image")));
+            this.pb_decrease.Location = new System.Drawing.Point(98, 9);
+            this.pb_decrease.Name = "pb_decrease";
+            this.pb_decrease.Size = new System.Drawing.Size(23, 20);
+            this.pb_decrease.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_decrease.TabIndex = 3;
+            this.pb_decrease.TabStop = false;
+            this.pb_decrease.Click += new System.EventHandler(this.pb_decrease_Click);
+            // 
+            // pb_increase
+            // 
+            this.pb_increase.Image = ((System.Drawing.Image)(resources.GetObject("pb_increase.Image")));
+            this.pb_increase.Location = new System.Drawing.Point(75, 9);
+            this.pb_increase.Name = "pb_increase";
+            this.pb_increase.Size = new System.Drawing.Size(23, 20);
+            this.pb_increase.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_increase.TabIndex = 3;
+            this.pb_increase.TabStop = false;
+            this.pb_increase.Click += new System.EventHandler(this.pb_increase_Click);
+            // 
+            // pb_underline
+            // 
+            this.pb_underline.Image = ((System.Drawing.Image)(resources.GetObject("pb_underline.Image")));
+            this.pb_underline.Location = new System.Drawing.Point(52, 9);
+            this.pb_underline.Name = "pb_underline";
+            this.pb_underline.Size = new System.Drawing.Size(23, 20);
+            this.pb_underline.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_underline.TabIndex = 2;
+            this.pb_underline.TabStop = false;
+            this.pb_underline.Click += new System.EventHandler(this.pb_underline_Click);
+            // 
+            // pb_italic
+            // 
+            this.pb_italic.Image = ((System.Drawing.Image)(resources.GetObject("pb_italic.Image")));
+            this.pb_italic.Location = new System.Drawing.Point(29, 9);
+            this.pb_italic.Name = "pb_italic";
+            this.pb_italic.Size = new System.Drawing.Size(23, 20);
+            this.pb_italic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_italic.TabIndex = 1;
+            this.pb_italic.TabStop = false;
+            this.pb_italic.Click += new System.EventHandler(this.pb_italic_Click);
+            // 
+            // pb_bold
+            // 
+            this.pb_bold.Image = ((System.Drawing.Image)(resources.GetObject("pb_bold.Image")));
+            this.pb_bold.Location = new System.Drawing.Point(6, 9);
+            this.pb_bold.Name = "pb_bold";
+            this.pb_bold.Size = new System.Drawing.Size(23, 20);
+            this.pb_bold.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_bold.TabIndex = 0;
+            this.pb_bold.TabStop = false;
+            this.pb_bold.Click += new System.EventHandler(this.pb_bold_Click);
             // 
             // tb_notes
             // 
-            this.tb_notes.Location = new System.Drawing.Point(7, 20);
+            this.tb_notes.Location = new System.Drawing.Point(7, 42);
             this.tb_notes.Name = "tb_notes";
-            this.tb_notes.Size = new System.Drawing.Size(731, 138);
+            this.tb_notes.Size = new System.Drawing.Size(731, 116);
             this.tb_notes.TabIndex = 0;
             this.tb_notes.Text = "";
             // 
@@ -489,6 +584,16 @@
             this.btn_removeRow.UseVisualStyleBackColor = true;
             this.btn_removeRow.Click += new System.EventHandler(this.btn_removeRow_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(136, 9);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 20);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -520,6 +625,13 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.gb_notes.ResumeLayout(false);
+            this.gb_notes.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_decrease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_increase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_underline)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_italic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_bold)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -569,6 +681,15 @@
         private System.Windows.Forms.Button btn_SaveNotes;
         private System.Windows.Forms.Button btn_editNames;
         private System.Windows.Forms.Button btn_removeRow;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.PictureBox pb_increase;
+        private System.Windows.Forms.PictureBox pb_underline;
+        private System.Windows.Forms.PictureBox pb_italic;
+        private System.Windows.Forms.PictureBox pb_bold;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.PictureBox pb_decrease;
+        private System.Windows.Forms.Button button1;
     }
 }
 

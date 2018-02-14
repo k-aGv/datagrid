@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Documents;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
-
 /*
  * Fixed incorrect space after the last item of the list
  * 
@@ -21,9 +21,13 @@ using System.Diagnostics;
  * 
  * */
 namespace datagrid {
+
     public partial class Form1 : Form {
+        
         int viewMargin = 10;
+        float _fSize = 8;
         bool _reset;
+        bool bold, italic, underline;
         static string _disDir = Directory.GetCurrentDirectory();
         string _database = _disDir + "/res/_stamps/__TMPDBSTAMP";
         string _timeStampFirst = _disDir + "/res/_stamps/__TIMESTAMPF";
@@ -125,6 +129,10 @@ namespace datagrid {
                 _w += dataGridView1.Columns[i].Width;
             }
 
+            //textbox font stuff
+            bold = false;
+            italic = false;
+            underline = false;
 
             tb_latest.Enabled = false;
             dataGridView1.ScrollBars = ScrollBars.Both;
@@ -712,6 +720,112 @@ namespace datagrid {
                 btn_removeRow.Enabled = true;
                 btn_removeRow.BackColor = Color.FromArgb(209, 11, 11);
             }
+        }
+
+
+        FontStyle[] _fontstyle = {
+            FontStyle.Bold,
+            FontStyle.Bold|FontStyle.Italic,
+            FontStyle.Bold|FontStyle.Underline,
+            FontStyle.Bold|FontStyle.Italic|FontStyle.Underline,
+
+            FontStyle.Italic,
+            FontStyle.Italic|FontStyle.Underline,
+
+            FontStyle.Underline
+        };
+
+        private void SetFont(bool _bold, bool _italic, bool _underline) {
+            
+            if (_bold && !_italic && !_underline)
+            {
+                tb_notes.SelectionFont = new Font(tb_notes.SelectionFont, _fontstyle[0]);
+            }
+            else if (_bold && _italic && !_underline)
+            {
+                tb_notes.SelectionFont = new Font(tb_notes.SelectionFont, _fontstyle[1]);
+            }
+            else if (_bold && !_italic && _underline)
+            {
+                tb_notes.SelectionFont = new Font(tb_notes.SelectionFont, _fontstyle[2]);
+            }
+            else if (_bold && _italic && _underline)
+            {
+                tb_notes.SelectionFont = new Font(tb_notes.SelectionFont, _fontstyle[3]);
+            }
+            else if(_italic && !_bold && !_underline)
+            {
+                tb_notes.SelectionFont = new Font(tb_notes.SelectionFont, _fontstyle[4]);
+            }
+            else if(_italic && _underline && !_bold)
+            {
+                tb_notes.SelectionFont = new Font(tb_notes.SelectionFont, _fontstyle[5]);
+            }
+            else if(_underline && !_italic && !_bold)
+            {
+                tb_notes.SelectionFont = new Font(tb_notes.SelectionFont, _fontstyle[6]);
+            }
+            else
+                tb_notes.SelectionFont = new Font(tb_notes.SelectionFont, FontStyle.Regular);
+        }
+        private void pb_bold_Click(object sender, EventArgs e) {
+            bold = !bold;
+            Font_Image_Pressed(sender,bold);
+            SetFont(bold, italic, underline);
+        }
+
+        private void pb_italic_Click(object sender, EventArgs e) {
+            italic = !italic;
+            Font_Image_Pressed(sender,italic);
+            SetFont(bold, italic, underline);
+        }
+
+        private void pb_underline_Click(object sender, EventArgs e) {
+            underline = !underline;
+            Font_Image_Pressed(sender,underline);
+            SetFont(bold, italic, underline);
+        }
+
+        private void pb_increase_Click(object sender, EventArgs e) {
+            _fSize++;
+            tb_notes.SelectionFont = new Font(tb_notes.SelectionFont.FontFamily, _fSize);
+        }
+
+        private void pb_decrease_Click(object sender, EventArgs e) {
+            _fSize--;
+            tb_notes.SelectionFont = new Font(tb_notes.SelectionFont.FontFamily, _fSize);
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            SaveFonts();
+        }
+
+        private void Font_Image_Pressed(object sender,bool active) {
+            ((PictureBox)sender).BackColor = active ? Color.FromKnownColor(KnownColor.LightGray) : Color.FromKnownColor(KnownColor.Transparent);
+        }
+
+        private void SaveFonts() {
+            List<char> _text = new List<char>();
+            List<float> _fontSizes = new List<float>();
+            List<FontStyle> _fontstyles = new List<FontStyle>();
+            StreamWriter _writer = new StreamWriter(_disDir + "/mylogs.txt");
+
+            for (int i = 0; i < tb_notes.Text.Length; i++)
+            {
+                tb_notes.Select(i, 1);
+                _text.Add(tb_notes.SelectedText[0]);
+
+                _fontSizes.Add(tb_notes.SelectionFont.Size);
+                _fontstyles.Add(tb_notes.SelectionFont.Style);
+                
+                _writer.WriteLine(
+                    "[" + tb_notes.SelectedText[0] + 
+                    "|" + tb_notes.SelectionFont.Style + 
+                    "|" + tb_notes.SelectionFont.Size +
+                    "]");
+            }
+            _writer.Close();
+            MessageBox.Show("Finished");
         }
     }
 }
