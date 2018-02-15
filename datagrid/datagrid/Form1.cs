@@ -25,7 +25,7 @@ namespace datagrid {
     public partial class Form1 : Form {
         
         int viewMargin = 10;
-        float _fSize = 8;
+        //float _fSize = 8;
         bool _reset;
         bool bold, italic, underline;
         static string _disDir = Directory.GetCurrentDirectory();
@@ -35,6 +35,7 @@ namespace datagrid {
         string _camoDir = _disDir + "/res/camo.jpg";
         string _iconDir = _disDir + "/res/icon.ico";
         string _notesDB = _disDir + "/res/_stamps/__DBNOTES";
+        string _fonts = _disDir + "/res/_stamps/__DBNOTESFONTS";
         string _names = _disDir + "/res/_stamps/__NAMES";
 
         string[] days = new string[]
@@ -787,11 +788,13 @@ namespace datagrid {
         }
 
         private void pb_increase_Click(object sender, EventArgs e) {
+            float _fSize = tb_notes.SelectionFont.Size;
             _fSize++;
             tb_notes.SelectionFont = new Font(tb_notes.SelectionFont.FontFamily, _fSize);
         }
 
         private void pb_decrease_Click(object sender, EventArgs e) {
+            float _fSize = tb_notes.SelectionFont.Size;
             _fSize--;
             tb_notes.SelectionFont = new Font(tb_notes.SelectionFont.FontFamily, _fSize);
         }
@@ -808,7 +811,7 @@ namespace datagrid {
             List<char> _text = new List<char>();
             List<float> _fontSizes = new List<float>();
             List<FontStyle> _fontstyles = new List<FontStyle>();
-            StreamWriter _writer = new StreamWriter(_disDir + "/mylogs.txt");
+            StreamWriter _writer = new StreamWriter(_fonts);
 
             for (int i = 0; i < tb_notes.Text.Length; i++)
             {
@@ -826,6 +829,13 @@ namespace datagrid {
             }
             _writer.Close();
             MessageBox.Show("Finished");
+        }
+
+        private bool LoadFonts() {
+
+
+
+            return true;
         }
     }
 }
