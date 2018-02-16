@@ -25,7 +25,6 @@ namespace datagrid {
     public partial class Form1 : Form {
         
         int viewMargin = 10;
-        //float _fSize = 8;
         bool _reset;
         bool bold, italic, underline;
         static string _disDir = Directory.GetCurrentDirectory();
@@ -35,7 +34,6 @@ namespace datagrid {
         string _camoDir = _disDir + "/res/camo.jpg";
         string _iconDir = _disDir + "/res/icon.ico";
         string _notesDB = _disDir + "/res/_stamps/__DBNOTES";
-        string _fonts = _disDir + "/res/_stamps/__DBNOTESFONTS";
         string _names = _disDir + "/res/_stamps/__NAMES";
 
         string[] days = new string[]
@@ -111,6 +109,7 @@ namespace datagrid {
 
             //MaximizeBox = false;
 
+            
             string names = GetNames();
             if (names != "")
             {
@@ -192,6 +191,9 @@ namespace datagrid {
             Icon z = Icon.FromHandle(pIcon);
             Icon = z;
 
+            if (File.Exists(_notesDB))
+                LoadNotes();
+
         }
 
 
@@ -252,14 +254,7 @@ namespace datagrid {
 
                 _reader.Close();
             }
-
-            if (File.Exists(_notesDB))
-            {
-                _reader = new StreamReader(_notesDB);
-                tb_notes.Text = _reader.ReadToEnd();
-                _reader.Close();
-            }
-
+            
         }
 
 
@@ -359,11 +354,7 @@ namespace datagrid {
             //Manage the unsaved notes
             if (File.Exists(_notesDB))
             {
-                string tmpNotes;
-                StreamReader _reader = new StreamReader(_notesDB);
-                tmpNotes = _reader.ReadToEnd();
-                _reader.Close();
-                if (tmpNotes != tb_notes.Text)
+                if(!CompareNotes(tb_notes,_notesDB))
                 {
                     DialogResult _dg = MessageBox.Show(
                     "Υπάρχουν σημειώσεις που δεν έχουν αποθηκευτεί.\r\nΝα γίνει αποθήκευση;",
@@ -375,9 +366,7 @@ namespace datagrid {
                     if (_dg == DialogResult.Yes)
                     {
                         File.Delete(_notesDB);
-                        StreamWriter _tmpwriter = new StreamWriter(_notesDB);
-                        _tmpwriter.Write(tb_notes.Text);
-                        _tmpwriter.Close();
+                        SaveNotes();
                     }
                 }
             }
@@ -399,13 +388,13 @@ namespace datagrid {
                 }
             }
         }
-
+        /*
         private void SaveNotes() {
             StreamWriter _tmpwriter = new StreamWriter(_notesDB);
             _tmpwriter.Write(tb_notes.Text);
             _tmpwriter.Close();
         }
-
+        */
         private void btn_search_Click(object sender, EventArgs e) {
             services_select();
         }
@@ -662,13 +651,8 @@ namespace datagrid {
         }
 
         private void btn_SaveNotes_Click(object sender, EventArgs e) {
+            //SaveNotes();
             SaveNotes();
-            MessageBox.Show(
-                "Οι σημειώσεις αποθηκεύτηκαν επιτυχώς.",
-                "Αποθήκευση σημειώσεων",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-                );
         }
 
         private void btn_editNames_Click(object sender, EventArgs e) {
@@ -790,52 +774,147 @@ namespace datagrid {
         private void pb_increase_Click(object sender, EventArgs e) {
             float _fSize = tb_notes.SelectionFont.Size;
             _fSize++;
-            tb_notes.SelectionFont = new Font(tb_notes.SelectionFont.FontFamily, _fSize);
+            tb_notes.SelectionFont = new Font(tb_notes.SelectionFont.FontFamily, _fSize, tb_notes.SelectionFont.Style);
         }
 
         private void pb_decrease_Click(object sender, EventArgs e) {
             float _fSize = tb_notes.SelectionFont.Size;
             _fSize--;
-            tb_notes.SelectionFont = new Font(tb_notes.SelectionFont.FontFamily, _fSize);
+            tb_notes.SelectionFont = new Font(tb_notes.SelectionFont.FontFamily, _fSize, tb_notes.SelectionFont.Style);
         }
-
-        private void button1_Click(object sender, EventArgs e) {
-            SaveFonts();
-        }
-
+        
         private void Font_Image_Pressed(object sender,bool active) {
             ((PictureBox)sender).BackColor = active ? Color.FromKnownColor(KnownColor.LightGray) : Color.FromKnownColor(KnownColor.Transparent);
         }
-
-        private void SaveFonts() {
-            List<char> _text = new List<char>();
-            List<float> _fontSizes = new List<float>();
-            List<FontStyle> _fontstyles = new List<FontStyle>();
-            StreamWriter _writer = new StreamWriter(_fonts);
-
-            for (int i = 0; i < tb_notes.Text.Length; i++)
+        
+        private bool SaveNotes() {
+            try
             {
-                tb_notes.Select(i, 1);
-                _text.Add(tb_notes.SelectedText[0]);
+                List<float> _fontSizes = new List<float>();
+                List<FontStyle> _fontstyles = new List<FontStyle>();
+                StreamWriter _writer = new StreamWriter(_notesDB);
+                string _text = "";
+                for (int i = 0; i < tb_notes.Text.Length; i++)
+                {
+                    tb_notes.Select(i, 1);
 
-                _fontSizes.Add(tb_notes.SelectionFont.Size);
-                _fontstyles.Add(tb_notes.SelectionFont.Style);
-                
-                _writer.WriteLine(
-                    "[" + tb_notes.SelectedText[0] + 
-                    "|" + tb_notes.SelectionFont.Style + 
-                    "|" + tb_notes.SelectionFont.Size +
-                    "]");
+
+                    _fontSizes.Add(tb_notes.SelectionFont.Size);
+                    _fontstyles.Add(tb_notes.SelectionFont.Style);
+                    _text += "[" + tb_notes.SelectedText[0] +
+                        "|" + tb_notes.SelectionFont.Style +
+                        "|" + tb_notes.SelectionFont.Size +
+                        "]";
+                }
+                _writer.Write(_text);
+                _writer.Close();
+
+                MessageBox.Show(
+                "Οι σημειώσεις αποθηκεύτηκαν επιτυχώς.",
+                "Αποθήκευση σημειώσεων",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
+
+                return true;
             }
-            _writer.Close();
-            MessageBox.Show("Finished");
+            catch
+            {
+                MessageBox.Show(
+                    "Σφάλμα κατά την αποθήκευση σημειώσεων.",
+                    "Σφάλμα αποθήκευσης",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+                return false;
+            }
+        }
+        
+        private bool CompareNotes(Control control, string FilePath)
+        {
+            RichTextBox _tb = ((RichTextBox)control);
+            string _text = "";
+            string _file_text = "";
+            for (int i = 0; i < _tb.Text.Length; i++)
+            {
+                _tb.Select(i, 1);
+                _text +=
+                    "[" + _tb.SelectedText[0] +
+                    "|" + _tb.SelectionFont.Style +
+                    "|" + _tb.SelectionFont.Size + "]";
+            }
+            StreamReader _reader = new StreamReader(FilePath);
+            _file_text = _reader.ReadToEnd();
+            _reader.Close();
+
+            if (_text == _file_text)
+                return true;
+            else
+                return false;
         }
 
-        private bool LoadFonts() {
+        private bool LoadNotes()
+        {
+            try
+            {
+                tb_notes.Text = "";
+
+                string _line;
+                string[] _part_lines;
+                string[] Fonts;
+
+                StreamReader _reader = new StreamReader(_notesDB);
+                _line = _reader.ReadToEnd();
+                _reader.Close();
 
 
+                _part_lines = _line.Split(']');
+                for (int i = 0; i < _part_lines.Length - 1; i++)
+                {
+                    _part_lines[i] = _part_lines[i].Trim('[', ']');
+                    Fonts = _part_lines[i].Split('|');
+                    tb_notes.Text += Fonts[0];
+                }
 
-            return true;
+                //Apply fonts
+                _reader = new StreamReader(_notesDB);
+                _line = _reader.ReadToEnd();
+                _reader.Close();
+
+                _part_lines = _line.Split(']');
+                for (int i = 0; i < _part_lines.Length - 1; i++)
+                {
+                    _part_lines[i] = _part_lines[i].Trim('[', ']');
+                    Fonts = _part_lines[i].Split('|');
+
+                    int _style_index = -1;
+                    bool _style_found = false;
+                    tb_notes.Select(i, 1);
+                    
+                    foreach (Enum _e in _fontstyle)
+                    {
+                        if (Fonts[1].ToString() == _e.ToString())
+                        {
+                            _style_index = Array.IndexOf(_fontstyle, _e);
+                            _style_found = true;
+                        }
+                    }
+                    tb_notes.SelectionFont = _style_found ? new Font(tb_notes.SelectionFont.FontFamily, ((float)Convert.ToDouble(Fonts[2])), _fontstyle[_style_index])
+                                                           :
+                                                           new Font(tb_notes.SelectionFont.FontFamily, ((float)Convert.ToDouble(Fonts[2])), FontStyle.Regular);
+                }
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show(
+                    "Notes could not be loaded.",
+                    "Notes error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+                return false;
+            }
         }
     }
 }
