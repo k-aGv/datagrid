@@ -494,6 +494,7 @@ namespace datagrid {
                 }
                 cb_days.Items[i] = cb_days.Items[i] + ": "+_i;
             }
+            cb_days.DroppedDown = true;
         }
 
         private void services_select(string _s1) {
