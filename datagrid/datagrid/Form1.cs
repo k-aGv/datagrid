@@ -86,11 +86,11 @@ namespace datagrid {
         private void ClearDataGridView() {
             dataGridView1.SelectAll();
 
-            foreach (object _o in dataGridView1.SelectedCells)
-                for (int i = 0; i < listBox1.Items.Count; i++)
-                    if (((DataGridViewCell)_o).Value.ToString() == listBox1.Items[i].ToString().Split(':')[0].ToString())
+            for (int i = 0; i < listBox1.Items.Count; i++)
+                foreach (object _o in dataGridView1.SelectedCells) {
+                    if ((((DataGridViewCell)_o).Value + "") == listBox1.Items[i].ToString().Split(':')[0].ToString())
                         ((DataGridViewCell)_o).Selected = false;
-
+                }
             foreach (object _o in dataGridView1.SelectedCells)
             {
                 ((DataGridViewCell)_o).Value = "";
