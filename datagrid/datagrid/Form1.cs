@@ -125,10 +125,6 @@ namespace datagrid {
                 _w += dataGridView1.Columns[i].Width;
             }
 
-            foreach (DataGridViewColumn _o in dataGridView1.Columns) {
-                cb_days.Items.Add(_o.HeaderText);
-            }
-
             tb_latest.Enabled = false;
             dataGridView1.ScrollBars = ScrollBars.Both;
             lb_start.Font = lb_latest.Font =
@@ -470,27 +466,34 @@ namespace datagrid {
             }
         }
         private void services_select() {
+            cb_days.Items.Clear();
+            foreach (DataGridViewColumn _o in dataGridView1.Columns) {
+                cb_days.Items.Add(_o.HeaderText);
+            }
+
             if (cbb_search_names.Text == "") {
                 MessageBox.Show("Παρακαλώ επιλέξτε όνομα προς αναζήτηση.");
                 return;
             }
-
-            
+            string _s1 = "";
+            if (cb_manualsearch.Checked)
+                _s1 = tb_search_name.Text;
+            else
+                _s1 = cbb_search_names.Text;
             int _i;
-            for (int i = 0; i < dataGridView1.Rows.Count; i++) {
+            for (int i = 0; i < dataGridView1.Columns.Count; i++) {
                 _i = 0;
-                for (int j = 0; j < dataGridView1.Columns.Count; j++) {
-                    dataGridView1[j, i].Selected = false;
+                for (int j = 0; j < dataGridView1.Rows.Count; j++) {
+                    dataGridView1[i, j].Selected = false;
                     string _s = "";
-                    _s = dataGridView1[j, i].Value + "";
-                    if (_s == cbb_search_names.Text) {
-                        dataGridView1[j, i].Selected = true;
+                    _s = dataGridView1[i, j].Value + "";
+                    if (_s == _s1) {
+                        dataGridView1[i, j].Selected = true;
                         _i++;
                     }
-                    
                 }
+                cb_days.Items[i] = cb_days.Items[i] + ": "+_i;
             }
-
         }
 
         private void services_select(string _s1) {
