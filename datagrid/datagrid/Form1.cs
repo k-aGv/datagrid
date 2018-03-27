@@ -140,7 +140,6 @@ namespace datagrid {
                lb_search.Font,
                FontStyle.Underline | FontStyle.Bold
                );
-            lb_ipiresiesResult.Text = "";
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
 
             cbb_add_names.DropDownStyle = cbb_search_names.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -166,7 +165,6 @@ namespace datagrid {
             btn_addRow.BackColor = Color.FromArgb(52, 173, 8);
             cb_reset.BackColor = lb_latest.BackColor = lb_start.BackColor = gb_toolbox.BackColor = Color.Transparent;
             cb_reset.ForeColor = lb_latest.ForeColor = lb_start.ForeColor =
-            lb_ipiresies.ForeColor = lb_ipiresiesResult.ForeColor =
             cb_manualsearch.ForeColor = label1.ForeColor = lb_search.ForeColor =
             groupBox3.ForeColor = lb_add.ForeColor = cb_manualAdd.ForeColor =
             lb_names.ForeColor = gb_toolbox.ForeColor = Color.White;
@@ -520,7 +518,6 @@ namespace datagrid {
                     }
 
                 }
-            lb_ipiresiesResult.Text = "" + counterDuties;
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e) {

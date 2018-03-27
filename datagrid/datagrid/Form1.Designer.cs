@@ -56,9 +56,7 @@
             this.cb_days = new System.Windows.Forms.ComboBox();
             this.cb_manualsearch = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lb_ipiresiesResult = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
-            this.lb_ipiresies = new System.Windows.Forms.Label();
             this.tb_search_name = new System.Windows.Forms.TextBox();
             this.lb_search = new System.Windows.Forms.Label();
             this.cbb_search_names = new System.Windows.Forms.ComboBox();
@@ -292,9 +290,7 @@
             this.groupBox2.Controls.Add(this.cb_days);
             this.groupBox2.Controls.Add(this.cb_manualsearch);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.lb_ipiresiesResult);
             this.groupBox2.Controls.Add(this.btn_search);
-            this.groupBox2.Controls.Add(this.lb_ipiresies);
             this.groupBox2.Controls.Add(this.tb_search_name);
             this.groupBox2.Controls.Add(this.lb_search);
             this.groupBox2.Controls.Add(this.cbb_search_names);
@@ -341,15 +337,6 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "Ονοματεπώνυμα";
             // 
-            // lb_ipiresiesResult
-            // 
-            this.lb_ipiresiesResult.AutoSize = true;
-            this.lb_ipiresiesResult.Location = new System.Drawing.Point(113, 146);
-            this.lb_ipiresiesResult.Name = "lb_ipiresiesResult";
-            this.lb_ipiresiesResult.Size = new System.Drawing.Size(35, 13);
-            this.lb_ipiresiesResult.TabIndex = 7;
-            this.lb_ipiresiesResult.Text = "label1";
-            // 
             // btn_search
             // 
             this.btn_search.Location = new System.Drawing.Point(167, 72);
@@ -359,15 +346,6 @@
             this.btn_search.Text = "Αναζήτηση";
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
-            // 
-            // lb_ipiresies
-            // 
-            this.lb_ipiresies.AutoSize = true;
-            this.lb_ipiresies.Location = new System.Drawing.Point(6, 146);
-            this.lb_ipiresies.Name = "lb_ipiresies";
-            this.lb_ipiresies.Size = new System.Drawing.Size(103, 13);
-            this.lb_ipiresies.TabIndex = 6;
-            this.lb_ipiresies.Text = "Πλήθος υπηρεσιών:";
             // 
             // tb_search_name
             // 
@@ -531,8 +509,6 @@
         private System.Windows.Forms.TextBox tb_search_name;
         private System.Windows.Forms.ComboBox cbb_search_names;
         private System.Windows.Forms.Label lb_search;
-        private System.Windows.Forms.Label lb_ipiresies;
-        private System.Windows.Forms.Label lb_ipiresiesResult;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btn_search;
