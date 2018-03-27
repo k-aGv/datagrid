@@ -61,7 +61,7 @@
             this.lb_ipiresies = new System.Windows.Forms.Label();
             this.tb_search_name = new System.Windows.Forms.TextBox();
             this.lb_search = new System.Windows.Forms.Label();
-            this.cbb_search_days = new System.Windows.Forms.ComboBox();
+            this.cbb_search_names = new System.Windows.Forms.ComboBox();
             this.btn_addRow = new System.Windows.Forms.Button();
             this.btn_Reset = new System.Windows.Forms.Button();
             this.cb_reset = new System.Windows.Forms.CheckBox();
@@ -297,7 +297,7 @@
             this.groupBox2.Controls.Add(this.lb_ipiresies);
             this.groupBox2.Controls.Add(this.tb_search_name);
             this.groupBox2.Controls.Add(this.lb_search);
-            this.groupBox2.Controls.Add(this.cbb_search_days);
+            this.groupBox2.Controls.Add(this.cbb_search_names);
             this.groupBox2.Location = new System.Drawing.Point(6, 332);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(258, 169);
@@ -316,14 +316,6 @@
             // cb_days
             // 
             this.cb_days.FormattingEnabled = true;
-            this.cb_days.Items.AddRange(new object[] {
-            "Δευτέρα",
-            "Τρίτη",
-            "Τετάρτη",
-            "Πέμπτη",
-            "Παρασκευή",
-            "Σάββατο",
-            "Κυριακή"});
             this.cb_days.Location = new System.Drawing.Point(5, 122);
             this.cb_days.Name = "cb_days";
             this.cb_days.Size = new System.Drawing.Size(148, 21);
@@ -395,13 +387,13 @@
             this.lb_search.TabIndex = 3;
             this.lb_search.Text = "Αναζήτηση";
             // 
-            // cbb_search_days
+            // cbb_search_names
             // 
-            this.cbb_search_days.FormattingEnabled = true;
-            this.cbb_search_days.Location = new System.Drawing.Point(7, 47);
-            this.cbb_search_days.Name = "cbb_search_days";
-            this.cbb_search_days.Size = new System.Drawing.Size(141, 21);
-            this.cbb_search_days.TabIndex = 4;
+            this.cbb_search_names.FormattingEnabled = true;
+            this.cbb_search_names.Location = new System.Drawing.Point(7, 47);
+            this.cbb_search_names.Name = "cbb_search_names";
+            this.cbb_search_names.Size = new System.Drawing.Size(141, 21);
+            this.cbb_search_names.TabIndex = 4;
             // 
             // btn_addRow
             // 
@@ -537,7 +529,7 @@
         private System.Windows.Forms.TextBox tb_add_name;
         private System.Windows.Forms.ComboBox cbb_add_names;
         private System.Windows.Forms.TextBox tb_search_name;
-        private System.Windows.Forms.ComboBox cbb_search_days;
+        private System.Windows.Forms.ComboBox cbb_search_names;
         private System.Windows.Forms.Label lb_search;
         private System.Windows.Forms.Label lb_ipiresies;
         private System.Windows.Forms.Label lb_ipiresiesResult;

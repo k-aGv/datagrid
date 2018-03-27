@@ -74,13 +74,13 @@ namespace datagrid {
                 foreach (string item in _names.Split(delim, StringSplitOptions.RemoveEmptyEntries))
                 {
                     cbb_add_names.Items.Add(item);
-                    cbb_search_days.Items.Add(item);
+                    cbb_search_names.Items.Add(item);
                 }
             }
         }
         private void ClearGBSettingsNameControls() {
             cbb_add_names.Items.Clear();
-            cbb_search_days.Items.Clear();
+            cbb_search_names.Items.Clear();
             listBox1.Items.Clear();
         }
         private void ClearDataGridView() {
@@ -114,7 +114,7 @@ namespace datagrid {
                 foreach (string item in names.Split(delim, StringSplitOptions.RemoveEmptyEntries))
                 {
                     cbb_add_names.Items.Add(item);
-                    cbb_search_days.Items.Add(item);
+                    cbb_search_names.Items.Add(item);
                 }
             }
             int _w = 0;
@@ -125,6 +125,9 @@ namespace datagrid {
                 _w += dataGridView1.Columns[i].Width;
             }
 
+            foreach (DataGridViewColumn _o in dataGridView1.Columns) {
+                cb_days.Items.Add(_o.HeaderText);
+            }
 
             tb_latest.Enabled = false;
             dataGridView1.ScrollBars = ScrollBars.Both;
@@ -144,7 +147,7 @@ namespace datagrid {
             lb_ipiresiesResult.Text = "";
             dataGridView1.Rows[0].DefaultCellStyle.BackColor = Color.LightGreen;
 
-            cbb_add_names.DropDownStyle = cbb_search_days.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbb_add_names.DropDownStyle = cbb_search_names.DropDownStyle = ComboBoxStyle.DropDownList;
             tb_search_name.Visible = false;
             tb_add_name.Visible = false;
             cb_reset.Checked = false;
@@ -404,10 +407,10 @@ namespace datagrid {
         private void cb_manualsearch_CheckedChanged(object sender, EventArgs e) {
             tb_search_name.Visible = cb_manualsearch.Checked;
             tb_search_name.Text = "";
-            cbb_search_days.Visible = !cb_manualsearch.Checked;
+            cbb_search_names.Visible = !cb_manualsearch.Checked;
             if (cb_manualsearch.Checked)
             {
-                cbb_search_days.Text = "";
+                cbb_search_names.Text = "";
             }
             else tb_search_name.Text = "";
         }
@@ -467,42 +470,26 @@ namespace datagrid {
             }
         }
         private void services_select() {
-            if ((cbb_search_days.Text == "" || cbb_search_days.Text == null) && (tb_search_name.Text == "" || tb_search_name.Text == null))
-            {
+            if (cbb_search_names.Text == "") {
                 MessageBox.Show("Παρακαλώ επιλέξτε όνομα προς αναζήτηση.");
                 return;
             }
 
-            if (cb_days.Text == "" || cb_days.Text == null)
-            {
-                MessageBox.Show("Παρακαλώ επιλέξτε ημέρα.");
-                return;
-            }
-            counterDuties = 0;
-
-            int whichDay = cb_days.SelectedIndex;
-            int rows = dataGridView1.Rows.Count;
-            string s = "";
-            for (int i = 0; i < rows; i++)
-            {
-
-                try
-                {
-                    if (cb_manualsearch.Checked) s = tb_search_name.Text;
-                    else s = cbb_search_days.Text;
-
-                    if (dataGridView1.Rows[i].Cells[whichDay].Value.ToString() == s)
-                    {
-                        counterDuties++;
+            
+            int _i;
+            for (int i = 0; i < dataGridView1.Rows.Count; i++) {
+                _i = 0;
+                for (int j = 0; j < dataGridView1.Columns.Count; j++) {
+                    dataGridView1[j, i].Selected = false;
+                    string _s = "";
+                    _s = dataGridView1[j, i].Value + "";
+                    if (_s == cbb_search_names.Text) {
+                        dataGridView1[j, i].Selected = true;
+                        _i++;
                     }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e + "");
+                    
                 }
             }
-
-            lb_ipiresiesResult.Text = "" + counterDuties + ", την ημέρα : " + cb_days.Text;
 
         }
 
